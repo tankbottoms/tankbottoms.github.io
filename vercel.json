@@ -1,0 +1,10 @@
+{
+  "framework": "sveltekit",
+  "buildCommand": "bun run build",
+  "installCommand": "bun install",
+  "build": {
+    "env": {
+      "NODE_VERSION": "22"
+    }
+  }
+}

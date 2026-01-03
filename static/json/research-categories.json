@@ -1,0 +1,60 @@
+{
+	"categories": [
+		{
+			"id": "naps",
+			"name": "Naps",
+			"shortName": "Naps",
+			"description": "Sleep research and optimal napping spots",
+			"color": "#9c27b0"
+		},
+		{
+			"id": "toys",
+			"name": "Toys",
+			"shortName": "Toys",
+			"description": "Play equipment analysis and reviews",
+			"color": "#ff9800"
+		},
+		{
+			"id": "things-to-knock-over",
+			"name": "Things to Knock Over",
+			"shortName": "Chaos",
+			"description": "Physics experiments from elevated surfaces",
+			"color": "#f44336"
+		},
+		{
+			"id": "mondays",
+			"name": "Mondays",
+			"shortName": "Mondays",
+			"description": "Weekly observations on the worst day",
+			"color": "#607d8b"
+		},
+		{
+			"id": "lasagna",
+			"name": "Lasagna",
+			"shortName": "Lasagna",
+			"description": "Culinary appreciation studies",
+			"color": "#ff5722"
+		},
+		{
+			"id": "owner-appreciation",
+			"name": "Owner Appreciation",
+			"shortName": "Humans",
+			"description": "Things humans do right",
+			"color": "#e91e63"
+		},
+		{
+			"id": "pet-peeves",
+			"name": "Pet Peeves",
+			"shortName": "Peeves",
+			"description": "Grievances and complaints",
+			"color": "#795548"
+		},
+		{
+			"id": "sunbeams",
+			"name": "Sunbeams",
+			"shortName": "Sunbeams",
+			"description": "Solar positioning and warmth optimization",
+			"color": "#ffc107"
+		}
+	]
+}

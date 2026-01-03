@@ -1,0 +1,7 @@
+[install]
+# Use exact versions
+exact = false
+
+[install.cache]
+# Cache packages
+dir = "~/.bun/install/cache"

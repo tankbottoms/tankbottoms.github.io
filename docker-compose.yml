@@ -1,0 +1,49 @@
+services:
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mrwhiskers-blog:latest
+    container_name: mrwhiskers-blog
+    ports:
+      - '4173:4173'
+    environment:
+      - NODE_ENV=production
+      - PORT=4173
+      - HOST=0.0.0.0
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'bun',
+          '--eval',
+          "fetch('http://localhost:4173').then(() => process.exit(0)).catch(() => process.exit(1))"
+        ]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    labels:
+      - "com.mrwhiskers.app=blog"
+      - "com.mrwhiskers.env=production"
+      - "com.mrwhiskers.version=1.0"
+    networks:
+      - blog-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  blog-network:
+    driver: bridge
