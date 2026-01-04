@@ -142,16 +142,16 @@ const EXCLUDE_PATTERNS = [
 	// Game assets
 	'/trex/',
 	// Large image directories (available via spark-2)
-	'/images/wallace/',
-	'/images/lahka/',
+	'/images/gallery/',
+	'/images/extras/',
 	// SVG icons (should be inlined as base64 in HTML)
 	'/images/svg-icons/',
-	// Cane head images (load from spark-2)
-	'/images/cane/',
+	// Cat images (load from spark-2)
+	'/images/whiskers/',
 	// JSON skiptraces (available via spark-2)
 	'/json/skiptraces/',
 	// Sprite files (game assets)
-	'cane-sprite-',
+	'mrwhiskers-sprite-',
 	// Infographic JSON data (SVGs are self-contained)
 	'infographic-',
 	// Individual asset JSON files (not essential for core site)
@@ -176,8 +176,8 @@ const EXCLUDE_PATTERNS = [
 	// Additional site images (load from spark-2)
 	'screenshot.png',
 	'us.svg',
-	'wallace.svg',
-	'lahka.svg',
+	'mrwhiskers.svg',
+	'extras.svg',
 	// Markdown documentation files
 	'/md/',
 	'README.md',
@@ -189,9 +189,9 @@ const EXCLUDE_PATTERNS = [
 	'/json/team.json',
 	// Favicon (can be served from HTML inline)
 	'favicon.svg',
-	// Cane head SVGs (inline as base64)
-	'cane-color.svg',
-	'cane-bw.svg',
+	// Cat SVGs (inline as base64)
+	'mrwhiskers-cat.svg',
+	'mrwhiskers-grey.svg',
 	// Old/test blog posts (earliest entries from 1983-2000)
 	'19830101-',
 	'19861023-',
@@ -313,7 +313,7 @@ async function deployToFilebase(account: FilebaseAccount, config: FilebaseConfig
 
 	// Generate a unique deployment folder name
 	const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-	const deployFolder = `cane-timeline-${timestamp}`;
+	const deployFolder = `mrwhiskers-blog-${timestamp}`;
 
 	let lastCid: string | null = null;
 	let uploadedCount = 0;
@@ -474,7 +474,7 @@ async function deployViaCarFile(account: FilebaseAccount, config: FilebaseConfig
 				'Authorization': `Bearer ${account.rpcApiKey}`
 			},
 			body: JSON.stringify({
-				name: `cane-timeline-${Date.now()}`,
+				name: `mrwhiskers-blog-${Date.now()}`,
 				// We'd need to provide the CID here, which requires pre-computing
 			})
 		});
@@ -556,7 +556,7 @@ async function deploySimple(account: FilebaseAccount, config: FilebaseConfig): P
 					ContentType: 'text/html',
 					Metadata: {
 						'import': 'car', // Request CAR import for directory
-						'name': 'cane-timeline'
+						'name': 'mrwhiskers-blog'
 					}
 				})
 			);
@@ -741,7 +741,7 @@ async function main() {
 						},
 						body: JSON.stringify({
 							cid: spark2Cid,
-							name: `cane-timeline-${Date.now()}`
+							name: `mrwhiskers-blog-${Date.now()}`
 						})
 					});
 

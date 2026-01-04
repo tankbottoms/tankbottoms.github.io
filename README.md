@@ -1,0 +1,174 @@
+# Mr. Whiskers Blog
+
+A minimal, timeline-style blog template built with SvelteKit 5. Designed for IPFS-first deployment with multi-platform mirror support.
+
+## Features
+
+- Timeline-based landing page with chronological post ordering
+- Nap Score rating system (1-5) for content evaluation
+- Research category tagging and filtering
+- Full IPFS/IPNS support with relative path conversion
+- Multi-platform deployment: IPFS, Vercel, GitHub Pages, Docker
+- Font Awesome icons with thin (fat) style preference
+- CSS variable-based theming
+- Markdown content with frontmatter metadata
+
+## Project Structure
+
+```
+tankbottoms-github-pages/
+  .github/
+    workflows/
+      deploy.yml          # GitHub Pages deployment
+  scripts/
+    check-links.ts        # Link verification (pre-build)
+    deploy-ipfs.ts        # IPFS/IPNS deployment
+    deploy-filebase.ts    # Filebase pinning backup
+    download-ipfs-cache.ts # IPFS content caching
+  src/
+    docs/
+      posts/              # Markdown blog posts
+    lib/
+      components/         # Svelte components
+      stores/             # State management
+      utils/              # Utility functions
+    routes/               # SvelteKit routes
+  static/
+    images/               # SVG and image assets
+    json/                 # JSON data files
+    fontawesome/          # Font Awesome icons
+  docker-compose.yml      # Container deployment
+  svelte.config.js        # Dual adapter (Vercel + Static)
+  svelte.config.static.js # IPFS-specific static adapter
+  vite.config.ts          # Vite configuration
+  IPFS-CID.md             # Current deployment info
+  CLAUDE.md               # AI assistant instructions
+```
+
+## Quick Start
+
+```bash
+# Install dependencies
+bun install
+
+# Development server
+bun run dev
+
+# Build for Vercel
+bun run build
+
+# Build and deploy to IPFS
+bun run ipfs
+```
+
+## Deployment Options
+
+### IPFS (Primary)
+
+The site is optimized for IPFS with automatic path conversion from absolute to relative URLs.
+
+```bash
+# Test IPFS connectivity
+bun run ipfs test
+
+# Deploy to IPFS and publish IPNS
+bun run ipfs
+
+# Verify existing deployment
+bun run ipfs verify
+```
+
+**IPNS Key:** `mrwhiskers-blog` (hosted on spark-2)
+
+**Gateways:**
+
+- Primary: `https://ipfs.pantsonfire.xyz`
+- Secondary: `https://ipfs1.shh-shush.xyz`
+- Public: `https://ipfs.io`, `https://dweb.link`
+
+### Vercel
+
+Automatically deployed on push to main branch. Uses `@sveltejs/adapter-vercel` with Node.js 22.x runtime.
+
+### GitHub Pages
+
+Workflow in `.github/workflows/deploy.yml` builds with `@sveltejs/adapter-static` and deploys to GitHub Pages.
+
+### Docker
+
+```bash
+# Build and run
+docker-compose up --build
+
+# Access at http://localhost:4173
+```
+
+## ENS Configuration
+
+The site uses IPNS for stable addressing. ENS domains point to the IPNS key, not the CID, so updates don't require ENS transactions.
+
+| Domain | Content |
+|--------|---------|
+| tankbottoms.eth | `ipns://[IPNS_NAME]` |
+
+## Build Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun run dev` | Development server with HMR |
+| `bun run build` | Production build (Vercel) |
+| `bun run ipfs` | Build and deploy to IPFS |
+| `bun run ipfs test` | Test IPFS node connectivity |
+| `bun run check-links` | Verify all internal/external links |
+| `bun run check-links:skip-external` | Check internal links only |
+
+## Pre-Build Checks
+
+The `postbuild` script automatically runs link verification:
+
+```bash
+bun run scripts/check-links.ts --skip-external
+```
+
+This catches:
+
+- Broken internal routes
+- Missing static assets
+- Invalid markdown links
+- IPFS CID format validation
+
+## Content Guidelines
+
+Blog posts are markdown files in `src/docs/posts/` with frontmatter:
+
+```yaml
+---
+title: Post Title
+blurb: Short description
+date: 2026-01-03
+napScore: 4
+research: [naps, sunbeams]
+---
+
+Content here...
+```
+
+**Nap Score:** 1-5 rating displayed as cat icons
+
+**Research Categories:** naps, toys, things-to-knock-over, mondays, lasagna, owner-appreciation, pet-peeves, sunbeams
+
+## Theming
+
+All colors use CSS variables defined in the layout. Never hardcode colors.
+
+**Accent:** `#9c27b0` (purple)
+
+**Icons:** Font Awesome Thin (`fat`) by default
+
+```svelte
+<i class="fat fa-cat"></i>
+```
+
+## License
+
+MIT

@@ -16,7 +16,8 @@ const CID_FILE = 'docs/IPFS-CID_CACHE.txt';
 
 // Multiple IPFS gateways to try (in order of preference)
 const GATEWAYS = [
-	'https://ipfs.kyleen-cane.xyz/ipfs',
+	'https://ipfs.pantsonfire.xyz/ipfs',
+	'https://ipfs1.shh-shush.xyz/ipfs',
 	'https://dweb.link/ipfs',
 	'https://ipfs.io/ipfs',
 	'https://cloudflare-ipfs.com/ipfs',

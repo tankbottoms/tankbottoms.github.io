@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: mrwhiskers-blog:latest
-    container_name: mrwhiskers-blog
+    image: tb-md-timeline-blog:latest
+    container_name: tb-md-timeline-blog
     ports:
       - '4173:4173'
     environment:
@@ -33,11 +33,11 @@ services:
           cpus: '0.5'
           memory: 256M
     labels:
-      - "com.mrwhiskers.app=blog"
-      - "com.mrwhiskers.env=production"
-      - "com.mrwhiskers.version=1.0"
+      - "xyz.atsignhandle.tb.app=blog"
+      - "xyz.atsignhandle.tb.env=production"
+      - "xyz.atsignhandle.tb.version=1.0"
     networks:
-      - blog-network
+      - md-timeline-network
     logging:
       driver: "json-file"
       options:
@@ -45,5 +45,5 @@ services:
         max-file: "3"
 
 networks:
-  blog-network:
+  md-timeline-network:
     driver: bridge

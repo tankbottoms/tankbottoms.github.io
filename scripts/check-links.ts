@@ -65,7 +65,8 @@ const IPFS_URL_PATTERN = /https?:\/\/[^"'\s]+\/(bafy[a-zA-Z0-9]{50,})/g;
 const TRUSTED_DOMAINS = new Set([
 	'localhost',
 	'127.0.0.1',
-	'ipfs.kyleen-cane.xyz',
+	'ipfs.pantsonfire.xyz',
+	'ipfs1.shh-shush.xyz',
 	'fonts.googleapis.com',
 	'fonts.gstatic.com',
 	'cdn.jsdelivr.net',
@@ -500,7 +501,7 @@ function printResults(results: LinkCheckResult[]): void {
 }
 
 async function main() {
-	console.log('Link Checker for Cane-Wallace Timeline\n');
+	console.log('Link Checker for Mr. Whiskers Blog\n');
 	console.log('Configuration:');
 	console.log(`  Source directories: ${SOURCE_DIRS.join(', ')}`);
 	console.log(`  Skip external: ${SKIP_EXTERNAL}`);

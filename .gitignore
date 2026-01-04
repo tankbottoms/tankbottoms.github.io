@@ -33,3 +33,5 @@ static/pdf/cache/
 # Filebase configuration (contains API keys)
 .filebase-config.json
 .filebase-verification-results.json
+
+/TODO.md

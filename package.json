@@ -1,5 +1,5 @@
 {
-	"name": "md-template-blog",
+	"name": "tankbottoms-md-timeline-blog",
 	"version": "1.0.0",
 	"private": true,
 	"type": "module",
@@ -15,7 +15,6 @@
 		"preview:bun": "bunx --bun vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"generate:semantic-triples": "bun run scripts/generate-semantic-triples.ts",
-		"verify:facts": "bun run scripts/verify-facts.ts",
 		"ipfs": "bun run scripts/deploy-ipfs.ts",
 		"ipfs:redirect": "bun run scripts/deploy-ipfs.ts redirect",
 		"ipfs:test": "bun run scripts/deploy-ipfs.ts test",

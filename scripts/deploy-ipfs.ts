@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * IPFS/IPNS Deployment Script for Cane Timeline Blog
+ * IPFS/IPNS Deployment Script for Mr. Whiskers Blog
  *
  * ============================================================================
  * ARCHITECTURE OVERVIEW
@@ -31,8 +31,8 @@
  * ============================================================================
  *
  * Two separate IPNS keys are used (hosted on spark-2):
- *   - cane-timeline:          Full site deployment
- *   - cane-timeline-redirect: Redirect page for ENS domains
+ *   - mrwhiskers-blog:          Full site deployment
+ *   - mrwhiskers-blog-redirect: Redirect page for ENS domains
  *
  * ============================================================================
  * USAGE
@@ -50,7 +50,7 @@
  *
  * Primary test endpoints (fast, reliable):
  *   1. spark-2.local:5001 API - Direct node access
- *   2. ipfs.kyleen-cane.xyz  - Self-hosted gateway
+ *   2. ipfs.pantsonfire.xyz  - Self-hosted gateway
  *
  * Public gateways (propagation delay expected):
  *   - ipfs.io, dweb.link
@@ -85,7 +85,7 @@ const IPFS_NODES = [
 
 // Primary gateways for testing (fast, reliable)
 const PRIMARY_TEST_GATEWAYS = [
-	'https://ipfs.kyleen-cane.xyz',  // Self-hosted, fastest
+	'https://ipfs.pantsonfire.xyz',  // Self-hosted, fastest
 ];
 
 // Public gateways (propagation may take time)
@@ -95,16 +95,16 @@ const PUBLIC_GATEWAYS = [
 ];
 
 // IPNS key names (hosted on spark-2)
-const IPNS_KEY_SITE = 'cane-timeline';
-const IPNS_KEY_REDIRECT = 'cane-timeline-redirect';
+const IPNS_KEY_SITE = 'mrwhiskers-blog';
+const IPNS_KEY_REDIRECT = 'mrwhiskers-blog-redirect';
 
 // Redirect target
-const REDIRECT_TARGET = 'https://kyleen-cane.xyz';
+const REDIRECT_TARGET = 'https://tankbottoms.xyz';
 
 // ENS domains
 const ENS_DOMAINS = {
-	site: ['kyleen-cane.eth'],
-	redirect: ['redirect.kyleen-cane.eth', 'about.kyleen-cane.eth'],
+	site: ['tankbottoms.eth'],
+	redirect: ['redirect.tankbottoms.eth', 'about.tankbottoms.eth'],
 };
 
 // ============================================================================
@@ -650,14 +650,14 @@ function createRedirectPage(): void {
 		mkdirSync(REDIRECT_DIR, { recursive: true });
 	}
 
-	// Get cane SVG for spinner
-	const caneSvgPath = join(PROJECT_ROOT, 'static/images/cane-color.svg');
-	let caneImg = '<div style="font-size:80px">Loading...</div>';
+	// Get cat SVG for spinner
+	const catSvgPath = join(PROJECT_ROOT, 'static/images/mrwhiskers-cat.svg');
+	let catImg = '<div style="font-size:80px">Loading...</div>';
 
-	if (existsSync(caneSvgPath)) {
-		const svgContent = readFileSync(caneSvgPath);
+	if (existsSync(catSvgPath)) {
+		const svgContent = readFileSync(catSvgPath);
 		const base64 = svgContent.toString('base64');
-		caneImg = `<img src="data:image/svg+xml;base64,${base64}" alt="Loading..." class="spin" width="100" height="100"/>`;
+		catImg = `<img src="data:image/svg+xml;base64,${base64}" alt="Loading..." class="spin" width="100" height="100"/>`;
 	}
 
 	const html = `<!DOCTYPE html>
@@ -666,7 +666,7 @@ function createRedirectPage(): void {
     <meta charset="UTF-8">
     <meta http-equiv="refresh" content="2; url=${REDIRECT_TARGET}">
     <meta name="robots" content="noindex">
-    <title>Redirecting to The Cane Files...</title>
+    <title>Redirecting to Mr. Whiskers Blog...</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -693,8 +693,8 @@ function createRedirectPage(): void {
 </head>
 <body>
     <div class="container">
-        ${caneImg}
-        <p>Redirecting to <a href="${REDIRECT_TARGET}">The Cane Files</a>...</p>
+        ${catImg}
+        <p>Redirecting to <a href="${REDIRECT_TARGET}">Mr. Whiskers Blog</a>...</p>
         <noscript>
             <p><a href="${REDIRECT_TARGET}">Click here</a> if not redirected.</p>
         </noscript>
@@ -721,14 +721,16 @@ function createRedirectPage(): void {
 function generateUrls(cid: string, ipnsName: string): { ipfs: string[]; ipns: string[] } {
 	const ipfs = [
 		// Self-hosted
-		`https://ipfs.kyleen-cane.xyz/ipfs/${cid}/`,
+		`https://ipfs.pantsonfire.xyz/ipfs/${cid}/`,
+		`https://ipfs1.shh-shush.xyz/ipfs/${cid}/`,
 		// Public
 		`https://ipfs.io/ipfs/${cid}/`,
 		`https://dweb.link/ipfs/${cid}/`,
 	];
 
 	const ipns = [
-		`https://ipfs.kyleen-cane.xyz/ipns/${ipnsName}/`,
+		`https://ipfs.pantsonfire.xyz/ipns/${ipnsName}/`,
+		`https://ipfs1.shh-shush.xyz/ipns/${ipnsName}/`,
 		`https://ipfs.io/ipns/${ipnsName}/`,
 		`https://dweb.link/ipns/${ipnsName}/`,
 	];
