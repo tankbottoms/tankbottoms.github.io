@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
-const STORAGE_KEY = 'search_history';
+const STORAGE_KEY = 'mrwhiskers_search_history';
 const MAX_HISTORY = 15;
 
 export interface SearchEntry {
