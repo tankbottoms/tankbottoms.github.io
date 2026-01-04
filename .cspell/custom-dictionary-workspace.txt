@@ -1,0 +1,29 @@
+# Custom Dictionary Words
+# Project-specific terms
+filebase
+mrwhiskers
+tankbottoms
+svelte
+sveltekit
+ipfs
+ipns
+vercel
+bun
+bunx
+
+# Technical terms
+prerender
+precompress
+frontmatter
+mdsvex
+rehype
+remark
+vite
+docx
+
+# Domain names
+pantsonfire
+shh-shush
+
+# File extensions and types
+svx

@@ -128,75 +128,19 @@ const EXCLUDE_PATTERNS = [
 	'/.osgrep/',
 	// System files
 	'.DS_Store',
-	// Large PDFs (already on IPFS via spark-2)
-	'/pdfs/',
 	// Lance DB files
 	'.lance',
 	'.txn',
 	'.manifest',
-	// Font Awesome (load from CDN: cdnjs.cloudflare.com/ajax/libs/font-awesome)
+	// Font Awesome (load from CDN instead)
 	'/fontawesome/',
-	// Media files (load from spark-2 IPFS gateway)
+	// Media files (large, load from primary IPFS gateway)
 	'/audio/',
 	'/video/',
-	// Game assets
-	'/trex/',
-	// Large image directories (available via spark-2)
-	'/images/gallery/',
-	'/images/extras/',
-	// SVG icons (should be inlined as base64 in HTML)
-	'/images/svg-icons/',
-	// Cat images (load from spark-2)
-	'/images/whiskers/',
-	// JSON skiptraces (available via spark-2)
-	'/json/skiptraces/',
-	// Sprite files (game assets)
-	'mrwhiskers-sprite-',
-	// Infographic JSON data (SVGs are self-contained)
-	'infographic-',
-	// Individual asset JSON files (not essential for core site)
-	'-assets.json',
-	// Panama papers data
-	'panama-bermuda-papers.json',
-	// Scheme data JSON (stock charts - load from spark-2)
-	'davi-skin.json',
-	'sdi-ventures.json',
-	'galaxy-gaming.json',
-	'mw-medical.json',
-	'sedona-software.json',
-	'legal-access-tech.json',
-	// Semantic triples (load from spark-2)
-	'semantic-triples.json',
-	// IPFS CID-addressed images (available via spark-2)
-	'bafybei',
-	// Timeline statistics (computed at build time on spark-2)
-	'timeline-statistics.json',
-	// Exhibits data (load from spark-2)
-	'exhibits.json',
-	// Additional site images (load from spark-2)
-	'screenshot.png',
-	'us.svg',
-	'mrwhiskers.svg',
-	'extras.svg',
+	'/pdfs/',
 	// Markdown documentation files
 	'/md/',
 	'README.md',
-	// Placeholder SVG (use inline)
-	'placeholder.svg',
-	// Version JSON (not needed for static site)
-	'version.json',
-	// Team JSON (load from spark-2, keep team-associates)
-	'/json/team.json',
-	// Favicon (can be served from HTML inline)
-	'favicon.svg',
-	// Cat SVGs (inline as base64)
-	'mrwhiskers-cat.svg',
-	'mrwhiskers-grey.svg',
-	// Old/test blog posts (earliest entries from 1983-2000)
-	'19830101-',
-	'19861023-',
-	'19960611-',
-	'19961202-',
 ];
 
 function shouldExcludeFile(filePath: string): boolean {

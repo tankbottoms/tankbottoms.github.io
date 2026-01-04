@@ -1,6 +1,17 @@
 {
-	"name": "tankbottoms-md-timeline-blog",
+	"name": "mrwhiskers-timeline-blog",
 	"version": "1.0.0",
+	"description": "A minimal timeline-style blog template built with SvelteKit 5",
+	"author": {
+		"name": "tankbottoms",
+		"email": "tankbottoms@users.noreply.github.com",
+		"url": "https://github.com/tankbottoms"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tankbottoms/tankbottoms.github.io.git"
+	},
 	"private": true,
 	"type": "module",
 	"engines": {
