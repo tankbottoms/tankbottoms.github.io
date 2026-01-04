@@ -3,14 +3,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: tb-md-timeline-blog:latest
-    container_name: tb-md-timeline-blog
+    image: mrwhiskers-blog:latest
+    container_name: mrwhiskers-blog
     ports:
-      - '4173:4173'
+      - '3000:3000'
     environment:
       - NODE_ENV=production
-      - PORT=4173
+      - PORT=3000
       - HOST=0.0.0.0
+      - ORIGIN=${ORIGIN:-http://localhost:3000}
     restart: unless-stopped
     healthcheck:
       test:
@@ -18,12 +19,12 @@ services:
           'CMD',
           'bun',
           '--eval',
-          "fetch('http://localhost:4173').then(() => process.exit(0)).catch(() => process.exit(1))"
+          "fetch('http://localhost:3000').then(r => r.ok ? process.exit(0) : process.exit(1)).catch(() => process.exit(1))"
         ]
       interval: 30s
       timeout: 3s
       retries: 3
-      start_period: 40s
+      start_period: 10s
     deploy:
       resources:
         limits:
@@ -33,17 +34,17 @@ services:
           cpus: '0.5'
           memory: 256M
     labels:
-      - "xyz.atsignhandle.tb.app=blog"
-      - "xyz.atsignhandle.tb.env=production"
-      - "xyz.atsignhandle.tb.version=1.0"
+      - 'blog.mrwhiskers.app=blog'
+      - 'blog.mrwhiskers.env=production'
+      - 'blog.mrwhiskers.version=1.0'
     networks:
-      - md-timeline-network
+      - blog-network
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
 
 networks:
-  md-timeline-network:
+  blog-network:
     driver: bridge
