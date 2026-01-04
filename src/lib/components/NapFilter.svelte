@@ -135,18 +135,6 @@
 		position: relative;
 	}
 
-	.filter-icon.selected::after {
-		content: '';
-		position: absolute;
-		bottom: -4px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 4px;
-		height: 4px;
-		background: var(--color-link, #1565c0);
-		border-radius: 50%;
-	}
-
 	.filter-separator {
 		color: var(--color-border, #ccc);
 		font-size: 1rem;
@@ -163,7 +151,13 @@
 	}
 
 	.featured-icon.active .featured-img {
-		filter: hue-rotate(320deg) saturate(1.5);
+		/* Just use the color SVG as-is, no filter */
+		filter: none;
+	}
+
+	.featured-icon.active:hover .featured-img {
+		/* Spin and enlarge on hover */
+		transform: rotate(360deg);
 	}
 
 	.featured-icon:not(.active) .featured-img {
@@ -172,10 +166,6 @@
 
 	.featured-icon:not(.active):hover .featured-img {
 		opacity: 0.7;
-	}
-
-	.featured-icon.selected::after {
-		background: #ef5350;
 	}
 
 	.clear-filter {
