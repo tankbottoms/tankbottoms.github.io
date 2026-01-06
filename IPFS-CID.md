@@ -7,7 +7,7 @@ Last updated: 2026-01-06
 ### Full Site
 | Field | Value |
 |-------|-------|
-| CID | `bafybeibzxgh5oisojsajju4xcnyrzixxggbne65vvrfl4tv6onuuvjkbxa` |
+| CID | `bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq` |
 | IPNS Key | `mrwhiskers-blog` |
 | IPNS Name | `k51qzi5uqu5dgikuhbwffm4s6f6y58tudbkilalhl4of8n3h1k3vbx29lz0h1d` |
 | Server | http://spark-2.local:5001 |
@@ -23,10 +23,10 @@ Last updated: 2026-01-06
 ## Access URLs
 
 ### Full Site
-- https://ipfs.pantsonfire.xyz/ipfs/bafybeibzxgh5oisojsajju4xcnyrzixxggbne65vvrfl4tv6onuuvjkbxa/
-- https://ipfs1.shh-shush.xyz/ipfs/bafybeibzxgh5oisojsajju4xcnyrzixxggbne65vvrfl4tv6onuuvjkbxa/
-- https://ipfs.io/ipfs/bafybeibzxgh5oisojsajju4xcnyrzixxggbne65vvrfl4tv6onuuvjkbxa/
-- https://dweb.link/ipfs/bafybeibzxgh5oisojsajju4xcnyrzixxggbne65vvrfl4tv6onuuvjkbxa/
+- https://ipfs.pantsonfire.xyz/ipfs/bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq/
+- https://ipfs1.shh-shush.xyz/ipfs/bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq/
+- https://ipfs.io/ipfs/bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq/
+- https://dweb.link/ipfs/bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq/
 
 ### Full Site IPNS (always latest)
 - https://ipfs.pantsonfire.xyz/ipns/k51qzi5uqu5dgikuhbwffm4s6f6y58tudbkilalhl4of8n3h1k3vbx29lz0h1d/
