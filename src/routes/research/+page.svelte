@@ -8,6 +8,7 @@
 		shortName: string;
 		description: string;
 		color: string;
+		icon: string;
 	};
 
 	let categories = $state<ResearchCategory[]>([]);
@@ -47,9 +48,10 @@
 		<div class="categories-grid">
 			{#each categories as category}
 				<a href="{base}/research/{category.id}" class="category-card" style="border-color: {category.color};">
-					<h2 style="color: {category.color};">{category.name}</h2>
+					<h2 style="color: {category.color};"><i class="fat {category.icon}"></i> {category.name}</h2>
 					<p>{category.description}</p>
 					<span class="badge" style="background-color: {category.color}20; color: {category.color}; border-color: {category.color};">
+						<i class="fat {category.icon}"></i>
 						{category.shortName}
 					</span>
 				</a>
@@ -120,11 +122,21 @@
 	}
 
 	.badge {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
 		font-family: var(--font-mono);
 		font-size: 0.7rem;
 		padding: 0.25rem 0.5rem;
 		border: 1px solid;
 		border-radius: 3px;
+	}
+
+	.badge i {
+		font-size: 0.8rem;
+	}
+
+	.category-card h2 i {
+		margin-right: 0.25rem;
 	}
 </style>

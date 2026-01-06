@@ -5,56 +5,64 @@
 			"name": "Naps",
 			"shortName": "Naps",
 			"description": "Sleep research and optimal napping spots",
-			"color": "#9c27b0"
+			"color": "#9c27b0",
+			"icon": "fa-moon"
 		},
 		{
 			"id": "toys",
 			"name": "Toys",
 			"shortName": "Toys",
 			"description": "Play equipment analysis and reviews",
-			"color": "#ff9800"
+			"color": "#ff9800",
+			"icon": "fa-baseball"
 		},
 		{
 			"id": "things-to-knock-over",
 			"name": "Things to Knock Over",
 			"shortName": "Chaos",
 			"description": "Physics experiments from elevated surfaces",
-			"color": "#f44336"
+			"color": "#f44336",
+			"icon": "fa-glass-water"
 		},
 		{
 			"id": "mondays",
 			"name": "Mondays",
 			"shortName": "Mondays",
 			"description": "Weekly observations on the worst day",
-			"color": "#607d8b"
+			"color": "#607d8b",
+			"icon": "fa-calendar-xmark"
 		},
 		{
 			"id": "lasagna",
 			"name": "Lasagna",
 			"shortName": "Lasagna",
 			"description": "Culinary appreciation studies",
-			"color": "#ff5722"
+			"color": "#ff5722",
+			"icon": "fa-utensils"
 		},
 		{
 			"id": "owner-appreciation",
 			"name": "Owner Appreciation",
 			"shortName": "Humans",
 			"description": "Things humans do right",
-			"color": "#e91e63"
+			"color": "#e91e63",
+			"icon": "fa-heart"
 		},
 		{
 			"id": "pet-peeves",
 			"name": "Pet Peeves",
 			"shortName": "Peeves",
 			"description": "Grievances and complaints",
-			"color": "#795548"
+			"color": "#795548",
+			"icon": "fa-face-angry"
 		},
 		{
 			"id": "sunbeams",
 			"name": "Sunbeams",
 			"shortName": "Sunbeams",
 			"description": "Solar positioning and warmth optimization",
-			"color": "#ffc107"
+			"color": "#ffc107",
+			"icon": "fa-sun"
 		}
 	]
 }

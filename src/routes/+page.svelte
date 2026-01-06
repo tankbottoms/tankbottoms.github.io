@@ -26,6 +26,7 @@
 		shortName: string;
 		description: string;
 		color: string;
+		icon: string;
 	};
 
 	let categories = $state<ResearchCategory[]>([]);
@@ -389,6 +390,7 @@
 																			class="category-badge"
 																			style="background-color: {category.color}20; border-color: {category.color}; color: {category.color};"
 																			title="{category.name}: {category.description}">
+																			<i class="fat {category.icon}"></i>
 																			{category.shortName}
 																		</span>
 																	{/if}
@@ -432,6 +434,7 @@
 					class="legend-category"
 					style="background-color: {category.color}20; border-color: {category.color}; color: {category.color};"
 					title="{category.name}: {category.description}">
+					<i class="fat {category.icon}"></i>
 					{category.shortName}
 				</span>
 			{/each}
@@ -694,33 +697,10 @@
 		position: relative;
 	}
 
-	.timeline-item.featured::before {
-		content: '';
-		position: absolute;
-		top: 0.5rem;
-		right: 0.5rem;
-		width: 20px;
-		height: 20px;
-		background: url('/images/mrwhiskers-cat.svg') no-repeat center center;
-		background-size: contain;
-		opacity: 0.6;
-	}
-
 	.timeline-item.featured:hover {
 		box-shadow: 6px 6px 0px var(--color-shadow);
 		background: var(--color-featured-bg);
 		transform: scale(1.04);
-	}
-
-	.timeline-item.featured:hover::before {
-		opacity: 1;
-		animation: wiggle 0.5s ease-in-out;
-	}
-
-	@keyframes wiggle {
-		0%, 100% { transform: rotate(0deg); }
-		25% { transform: rotate(-10deg); }
-		75% { transform: rotate(10deg); }
 	}
 
 	.timeline-item.featured .timeline-dot {
@@ -823,6 +803,13 @@
 		white-space: nowrap;
 		cursor: help;
 		transition: all 0.2s;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
+	.category-badge i {
+		font-size: 0.7rem;
 	}
 
 	.category-badge:hover {
@@ -861,6 +848,13 @@
 		white-space: nowrap;
 		cursor: help;
 		transition: all 0.2s;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+	}
+
+	.legend-category i {
+		font-size: 0.8rem;
 	}
 
 	.legend-category:hover {

@@ -47,7 +47,7 @@
 
 	{#if categoryInfo}
 		<header class="category-header" style="border-color: {categoryInfo.color};">
-			<h1 style="color: {categoryInfo.color};">{categoryInfo.name}</h1>
+			<h1 style="color: {categoryInfo.color};"><i class="fat {categoryInfo.icon}"></i> {categoryInfo.name}</h1>
 			<p>{categoryInfo.description}</p>
 			<span class="post-count">{categoryPosts.length} {categoryPosts.length === 1 ? 'entry' : 'entries'}</span>
 		</header>
@@ -104,6 +104,10 @@
 		font-family: var(--font-serif);
 		font-size: 2rem;
 		margin: 0 0 0.5rem 0;
+	}
+
+	.category-header h1 i {
+		margin-right: 0.35rem;
 	}
 
 	.category-header p {

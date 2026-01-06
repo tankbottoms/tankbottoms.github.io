@@ -1,58 +1,52 @@
 # IPFS Deployment
 
-Last updated: 2026-01-03
+Last updated: 2026-01-06
 
 ## Current Deployments
 
 ### Full Site
-
 | Field | Value |
 |-------|-------|
-| CID | `bafybeighbkig3ginwn7kb4mfoxyqfrtbm6bzsfoiz4cyfwbqgyb3lftigu` |
+| CID | `bafybeibzxgh5oisojsajju4xcnyrzixxggbne65vvrfl4tv6onuuvjkbxa` |
 | IPNS Key | `mrwhiskers-blog` |
-| IPNS Name | `k51qzi5uqu5djqjeph794cc53kvd9qt784kptanc2twsyto97ytyibg5m9b0us` |
+| IPNS Name | `k51qzi5uqu5dgikuhbwffm4s6f6y58tudbkilalhl4of8n3h1k3vbx29lz0h1d` |
 | Server | http://spark-2.local:5001 |
 
 ### Redirect Page
-
 | Field | Value |
 |-------|-------|
 | CID | `N/A` |
-| IPNS Key | `mrwhiskers-blog-redirect` |
+| IPNS Key | `N/A` |
 | IPNS Name | `N/A` |
 | Server | N/A |
 
 ## Access URLs
 
-### Full Site (IPFS - immutable)
-
-- https://ipfs.pantsonfire.xyz/ipfs/bafybeighbkig3ginwn7kb4mfoxyqfrtbm6bzsfoiz4cyfwbqgyb3lftigu/
-- https://ipfs1.shh-shush.xyz/ipfs/bafybeighbkig3ginwn7kb4mfoxyqfrtbm6bzsfoiz4cyfwbqgyb3lftigu/
-- https://ipfs.io/ipfs/bafybeighbkig3ginwn7kb4mfoxyqfrtbm6bzsfoiz4cyfwbqgyb3lftigu/
-- https://dweb.link/ipfs/bafybeighbkig3ginwn7kb4mfoxyqfrtbm6bzsfoiz4cyfwbqgyb3lftigu/
+### Full Site
+- https://ipfs.pantsonfire.xyz/ipfs/bafybeibzxgh5oisojsajju4xcnyrzixxggbne65vvrfl4tv6onuuvjkbxa/
+- https://ipfs1.shh-shush.xyz/ipfs/bafybeibzxgh5oisojsajju4xcnyrzixxggbne65vvrfl4tv6onuuvjkbxa/
+- https://ipfs.io/ipfs/bafybeibzxgh5oisojsajju4xcnyrzixxggbne65vvrfl4tv6onuuvjkbxa/
+- https://dweb.link/ipfs/bafybeibzxgh5oisojsajju4xcnyrzixxggbne65vvrfl4tv6onuuvjkbxa/
 
 ### Full Site IPNS (always latest)
+- https://ipfs.pantsonfire.xyz/ipns/k51qzi5uqu5dgikuhbwffm4s6f6y58tudbkilalhl4of8n3h1k3vbx29lz0h1d/
+- https://ipfs1.shh-shush.xyz/ipns/k51qzi5uqu5dgikuhbwffm4s6f6y58tudbkilalhl4of8n3h1k3vbx29lz0h1d/
+- https://ipfs.io/ipns/k51qzi5uqu5dgikuhbwffm4s6f6y58tudbkilalhl4of8n3h1k3vbx29lz0h1d/
+- https://dweb.link/ipns/k51qzi5uqu5dgikuhbwffm4s6f6y58tudbkilalhl4of8n3h1k3vbx29lz0h1d/
 
-- https://ipfs.pantsonfire.xyz/ipns/k51qzi5uqu5djqjeph794cc53kvd9qt784kptanc2twsyto97ytyibg5m9b0us/
-- https://ipfs1.shh-shush.xyz/ipns/k51qzi5uqu5djqjeph794cc53kvd9qt784kptanc2twsyto97ytyibg5m9b0us/
-- https://ipfs.io/ipns/k51qzi5uqu5djqjeph794cc53kvd9qt784kptanc2twsyto97ytyibg5m9b0us/
-- https://dweb.link/ipns/k51qzi5uqu5djqjeph794cc53kvd9qt784kptanc2twsyto97ytyibg5m9b0us/
+### Redirect Page
+- N/A
+
+### Redirect IPNS
+- N/A
 
 ## ENS Configuration
 
 ### Full Site
-
-Set content field to: `ipns://k51qzi5uqu5djqjeph794cc53kvd9qt784kptanc2twsyto97ytyibg5m9b0us`
-
+Set content field to: `ipns://k51qzi5uqu5dgikuhbwffm4s6f6y58tudbkilalhl4of8n3h1k3vbx29lz0h1d`
 - tankbottoms.eth
 
 ### Redirect
-
 Set content field to: `ipns://IPNS_NAME`
-
 - redirect.tankbottoms.eth
 - about.tankbottoms.eth
-
-## Deployment Notes
-
-The site is built with SvelteKit's static adapter and all paths are converted to relative paths for IPFS compatibility. The IPNS key provides a stable address that can be updated without changing the ENS content hash.
