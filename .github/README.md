@@ -121,6 +121,7 @@ The site uses IPNS for stable addressing. ENS domains point to the IPNS key, not
 | `bun run ipfs test` | Test IPFS node connectivity |
 | `bun run check-links` | Verify all internal/external links |
 | `bun run check-links:skip-external` | Check internal links only |
+| `bun run generate:ux-spec` | Generate UX specification page |
 
 ## Pre-Build Checks
 
@@ -168,6 +169,30 @@ All colors use CSS variables defined in the layout. Never hardcode colors.
 ```svelte
 <i class="fat fa-cat"></i>
 ```
+
+## UX Specification
+
+The project includes a comprehensive UX specification at `/ux-spec` documenting the design system:
+
+- **Design Principles**: Terminal aesthetic, information density, consistent spacing
+- **Color Palette**: Core, scheme, and semantic colors with CSS variable names
+- **Typography**: Font stacks and size hierarchy
+- **Box Types**: Section boxes, filter boxes, stats cards, timeline entries
+- **Badges**: Category badges and status indicators
+- **Icons**: Font Awesome Thin icon reference
+
+**Generate/Regenerate:**
+
+```bash
+bun run generate:ux-spec
+```
+
+This creates:
+
+- `/ux-spec` route with interactive documentation
+- `docs/UX_SPECIFICATION.md` markdown version
+
+The page includes export buttons for PDF, Markdown, and plain text formats.
 
 ## License
 

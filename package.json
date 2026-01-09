@@ -36,7 +36,8 @@
 		"check-links:skip-external": "bun run scripts/check-links.ts --skip-external",
 		"postbuild": "bun run scripts/check-links.ts --skip-external",
 		"download-ipfs-cache": "bun run scripts/download-ipfs-cache.ts",
-		"download-ipfs-cache:check": "bun run scripts/download-ipfs-cache.ts --check"
+		"download-ipfs-cache:check": "bun run scripts/download-ipfs-cache.ts --check",
+		"generate:ux-spec": "bun run scripts/generate-ux-spec.ts"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.57.0",
