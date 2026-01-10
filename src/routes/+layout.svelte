@@ -22,7 +22,7 @@
 	let currentPath = $derived($page.url.pathname);
 	let cidCopied = $state(false);
 
-	const FULL_CID = 'bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq';
+	const FULL_CID = 'bafybeiaoqyjwmtfnmayiwnsdes2eiodmsakrbcd5f5nbpmw5hv6hbl2n64';
 
 	async function copyCidToClipboard(event: MouseEvent) {
 		event.preventDefault();

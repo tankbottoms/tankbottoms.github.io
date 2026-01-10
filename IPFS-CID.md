@@ -1,13 +1,13 @@
 # IPFS Deployment
 
-Last updated: 2026-01-06
+Last updated: 2026-01-10
 
 ## Current Deployments
 
 ### Full Site
 | Field | Value |
 |-------|-------|
-| CID | `bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq` |
+| CID | `bafybeiaoqyjwmtfnmayiwnsdes2eiodmsakrbcd5f5nbpmw5hv6hbl2n64` |
 | IPNS Key | `mrwhiskers-blog` |
 | IPNS Name | `k51qzi5uqu5dgikuhbwffm4s6f6y58tudbkilalhl4of8n3h1k3vbx29lz0h1d` |
 | Server | http://spark-2.local:5001 |
@@ -23,10 +23,10 @@ Last updated: 2026-01-06
 ## Access URLs
 
 ### Full Site
-- https://ipfs.pantsonfire.xyz/ipfs/bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq/
-- https://ipfs1.shh-shush.xyz/ipfs/bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq/
-- https://ipfs.io/ipfs/bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq/
-- https://dweb.link/ipfs/bafybeic55uqucgaa6tru4mlho2hxc3qv36xvcqwdvck5zcozozfod2e5oq/
+- https://ipfs.pantsonfire.xyz/ipfs/bafybeiaoqyjwmtfnmayiwnsdes2eiodmsakrbcd5f5nbpmw5hv6hbl2n64/
+- https://ipfs1.shh-shush.xyz/ipfs/bafybeiaoqyjwmtfnmayiwnsdes2eiodmsakrbcd5f5nbpmw5hv6hbl2n64/
+- https://ipfs.io/ipfs/bafybeiaoqyjwmtfnmayiwnsdes2eiodmsakrbcd5f5nbpmw5hv6hbl2n64/
+- https://dweb.link/ipfs/bafybeiaoqyjwmtfnmayiwnsdes2eiodmsakrbcd5f5nbpmw5hv6hbl2n64/
 
 ### Full Site IPNS (always latest)
 - https://ipfs.pantsonfire.xyz/ipns/k51qzi5uqu5dgikuhbwffm4s6f6y58tudbkilalhl4of8n3h1k3vbx29lz0h1d/
