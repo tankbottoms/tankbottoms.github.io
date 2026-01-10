@@ -23,11 +23,18 @@
 	// Track if we're updating from URL to avoid loops
 	let isUpdatingFromUrl = false;
 
+	// Track pending debounced URL updates (prevents race condition during typing)
+	let urlUpdateTimeout: ReturnType<typeof setTimeout> | null = null;
+
 	// Handle URL changes (back/forward navigation, direct links)
 	// Only sync when the URL actually changes from external navigation
 	// CRITICAL: Use untrack() for searchTerm to prevent effect from running when user types
 	$effect(() => {
 		if (!browser) return;
+
+		// Skip sync if we have a pending debounced URL update (user is actively typing)
+		// This prevents the race condition where $page updates before our replaceState runs
+		if (untrack(() => urlUpdateTimeout !== null)) return;
 
 		const urlQuery = $page.url.searchParams.get('q') || '';
 		const urlColor = $page.url.searchParams.get('color') || '';
@@ -160,8 +167,6 @@
 
 	// Sync search term to URL for back navigation support
 	// Debounce URL updates to avoid interfering with typing
-	let urlUpdateTimeout: ReturnType<typeof setTimeout> | null = null;
-
 	$effect(() => {
 		if (!browser || isUpdatingFromUrl) return;
 
@@ -195,6 +200,8 @@
 				}
 				// Use replaceState to update URL without navigation
 				replaceState(url.pathname + url.search, {});
+				// Clear timeout reference after URL is updated
+				urlUpdateTimeout = null;
 			}, 150); // Small debounce to let typing complete
 		}
 	});
