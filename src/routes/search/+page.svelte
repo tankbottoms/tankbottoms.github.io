@@ -20,40 +20,28 @@
 	let searchInput: HTMLInputElement;
 	let teamData = $state<any>(null);
 
-	// Track if we're updating from URL to avoid loops
-	let isUpdatingFromUrl = false;
-
-	// Track pending debounced URL updates (prevents race condition during typing)
-	let urlUpdateTimeout: ReturnType<typeof setTimeout> | null = null;
-
-	// Handle URL changes (back/forward navigation, direct links)
-	// Only sync when the URL actually changes from external navigation
-	// CRITICAL: Use untrack() for searchTerm to prevent effect from running when user types
-	$effect(() => {
+	// Handle back/forward navigation via popstate event
+	// This is more reliable than watching $page because $page updates on replaceState too
+	onMount(() => {
 		if (!browser) return;
 
-		// Skip sync if we have a pending debounced URL update (user is actively typing)
-		// This prevents the race condition where $page updates before our replaceState runs
-		if (untrack(() => urlUpdateTimeout !== null)) return;
+		const handlePopState = () => {
+			const urlParams = new URLSearchParams(window.location.search);
+			const urlQuery = urlParams.get('q') || '';
+			const urlColor = urlParams.get('color') || '';
+			const urlSource = (urlParams.get('source') as 'associate' | 'scheme' | 'manual') || 'manual';
 
-		const urlQuery = $page.url.searchParams.get('q') || '';
-		const urlColor = $page.url.searchParams.get('color') || '';
-		const urlSource = ($page.url.searchParams.get('source') as 'associate' | 'scheme' | 'manual') || 'manual';
-
-		// Read current values without tracking them as dependencies
-		// This prevents the effect from re-running when user types (which changes searchTerm)
-		const currentTerm = untrack(() => searchTerm);
-		const updating = untrack(() => isUpdatingFromUrl);
-
-		// Only update if URL changed externally (not from our own replaceState)
-		if (urlQuery !== currentTerm && !updating) {
-			isUpdatingFromUrl = true;
+			// Sync URL to state on back/forward navigation
 			searchTerm = urlQuery;
 			searchColor = urlColor;
 			searchSource = urlSource;
-			// Reset flag after a tick
-			setTimeout(() => { isUpdatingFromUrl = false; }, 0);
-		}
+		};
+
+		window.addEventListener('popstate', handlePopState);
+
+		return () => {
+			window.removeEventListener('popstate', handlePopState);
+		};
 	});
 
 	// Subscribe to search history changes
@@ -165,44 +153,39 @@
 		}
 	}
 
+	// Track URL state to avoid unnecessary updates (initialize from URL)
+	let lastUrlQuery = untrack(() => data.searchQuery || '');
+
 	// Sync search term to URL for back navigation support
-	// Debounce URL updates to avoid interfering with typing
 	$effect(() => {
-		if (!browser || isUpdatingFromUrl) return;
+		if (!browser) return;
 
 		const term = searchTerm.trim();
-		const currentUrlTerm = $page.url.searchParams.get('q') || '';
 
-		// Only update URL if term changed
-		if (term !== currentUrlTerm) {
-			// Clear any pending update
-			if (urlUpdateTimeout) clearTimeout(urlUpdateTimeout);
+		// Only update URL if term actually changed
+		if (term !== lastUrlQuery) {
+			lastUrlQuery = term;
 
-			// Debounce the URL update to avoid interfering with typing
-			urlUpdateTimeout = setTimeout(() => {
-				const url = new URL($page.url);
-				if (term) {
-					url.searchParams.set('q', term);
-					if (searchSource && searchSource !== 'manual') {
-						url.searchParams.set('source', searchSource);
-					} else {
-						url.searchParams.delete('source');
-					}
-					if (searchColor) {
-						url.searchParams.set('color', searchColor);
-					} else {
-						url.searchParams.delete('color');
-					}
+			const url = new URL(window.location.href);
+			if (term) {
+				url.searchParams.set('q', term);
+				if (searchSource && searchSource !== 'manual') {
+					url.searchParams.set('source', searchSource);
 				} else {
-					url.searchParams.delete('q');
 					url.searchParams.delete('source');
+				}
+				if (searchColor) {
+					url.searchParams.set('color', searchColor);
+				} else {
 					url.searchParams.delete('color');
 				}
-				// Use replaceState to update URL without navigation
-				replaceState(url.pathname + url.search, {});
-				// Clear timeout reference after URL is updated
-				urlUpdateTimeout = null;
-			}, 150); // Small debounce to let typing complete
+			} else {
+				url.searchParams.delete('q');
+				url.searchParams.delete('source');
+				url.searchParams.delete('color');
+			}
+			// Use replaceState to update URL without triggering navigation
+			replaceState(url.pathname + url.search, {});
 		}
 	});
 
