@@ -25,14 +25,12 @@ export interface GatewayCache {
 }
 
 // Public IPFS gateways sorted by priority
+// Removed: cloudflare-ipfs.com (DNS), nftstorage.link (deprecated), gateway.pinata.cloud (CORS)
 export const PUBLIC_GATEWAYS = [
 	'https://ipfs.pantsonfire.xyz/ipfs/',
 	'https://dweb.link/ipfs/',
-	'https://cloudflare-ipfs.com/ipfs/',
 	'https://ipfs.io/ipfs/',
-	'https://gateway.pinata.cloud/ipfs/',
 	'https://w3s.link/ipfs/',
-	'https://nftstorage.link/ipfs/',
 	'https://4everland.io/ipfs/',
 ] as const;
 
@@ -40,7 +38,6 @@ export const PUBLIC_GATEWAYS = [
 export const IPNS_GATEWAYS = [
 	'https://ipfs.io/ipns/',
 	'https://dweb.link/ipns/',
-	'https://cloudflare-ipfs.com/ipns/',
 	'https://gateway.ipfs.io/ipns/',
 ] as const;
 
