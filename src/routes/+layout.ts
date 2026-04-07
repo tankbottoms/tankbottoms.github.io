@@ -20,7 +20,7 @@ type PostMetadata = {
 	readingTimeText?: string;
 	tags?: string[];
 	research?: string[];
-	napScore?: number;
+	significance?: number;
 	featured?: boolean;
 };
 

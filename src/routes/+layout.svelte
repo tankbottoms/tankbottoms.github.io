@@ -6,8 +6,6 @@
 	import { statistics } from '$lib/stores/statistics';
 	import { dev, browser } from '$app/environment';
 	import { base } from '$app/paths';
-	import { inject } from '@vercel/analytics';
-	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { initIpfsIframeUpgrader } from '$lib/utils/ipfs-iframe-upgrader';
@@ -41,9 +39,17 @@
 		stats = value;
 	});
 
-	// Inject Vercel Analytics and Speed Insights
-	inject({ mode: dev ? 'development' : 'production' });
-	injectSpeedInsights();
+	// Inject Vercel Analytics and Speed Insights (only on Vercel)
+	onMount(async () => {
+		if (browser && window.location.hostname.includes('vercel')) {
+			try {
+				const { inject } = await import('@vercel/analytics');
+				const { injectSpeedInsights } = await import('@vercel/speed-insights/sveltekit');
+				inject({ mode: dev ? 'development' : 'production' });
+				injectSpeedInsights();
+			} catch {}
+		}
+	});
 
 	// Initialize IPFS gateway checking, iframe upgrader, and prefetch on app load
 	onMount(() => {
@@ -60,6 +66,7 @@
 
 <svelte:head>
 	<script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.2/dist/svg.min.js"></script>
+	<script src="https://fathom.atsignhandle.xyz/api/tracker/b677c21efde45a98" defer></script>
 	<link rel="stylesheet" href="{base}/fontawesome/css/all.min.css" />
 </svelte:head>
 
@@ -71,17 +78,13 @@
 					<a class="title" href="{base}/">
 						<img src="{base}/images/mrwhiskers-me.svg" alt="" class="title-logo" />
 						<span class="title-text">
-							<span class="title-default">Mr. Whiskers Blog</span>
-							<span class="title-hover">A Feline Perspective</span>
+							<span class="title-default">atsignhandle.xyz</span>
+							<span class="title-hover">Development Portfolio</span>
 						</span>
 					</a>
-					<span class="title-subtitle">
-						Documenting feline observations since 2018
-					</span>
 				</div>
 				<nav class="nav">
 					<a href="{base}/" class:active={currentPath === '/'}>Home</a>
-					<a href="{base}/research" class:active={currentPath === '/research' || currentPath.startsWith('/research/')}>Research</a>
 					<a href="{base}/about" class:active={currentPath === '/about'}>About</a>
 					<a href="{base}/search" class="search-icon" aria-label="Search">
 						<svg
@@ -111,8 +114,8 @@
 			<div class="footer">
 				<div class="footer-content">
 					<span class="footer-title">
-						<span class="footer-title-default">Mr. Whiskers Blog</span>
-						<span class="footer-title-hover">Purr-fect Observations</span>
+						<span class="footer-title-default">atsignhandle.xyz</span>
+						<span class="footer-title-hover">Development History</span>
 					</span>
 					<span class="footer-separator">*</span>
 					<span class="footer-views">
@@ -176,8 +179,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		margin-bottom: 3rem;
-		padding-bottom: 1rem;
+		margin-bottom: 1.5rem;
+		padding-bottom: 0.5rem;
 	}
 
 	@media (min-width: 768px) {
@@ -228,14 +231,6 @@
 
 	.title:hover .title-hover {
 		display: inline;
-	}
-
-	.title-subtitle {
-		display: block;
-		font-size: 0.7rem;
-		color: var(--color-text-muted);
-		font-family: var(--font-mono);
-		margin-top: 0.15rem;
 	}
 
 	.title-logo {
@@ -298,6 +293,8 @@
 	}
 
 	.content {
+		max-width: 750px;
+		margin: 0 auto;
 		min-height: 60vh;
 	}
 

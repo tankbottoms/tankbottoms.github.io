@@ -1,6 +1,21 @@
-import { readdir, readFile } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
+let readdir: typeof import('fs/promises').readdir;
+let readFile: typeof import('fs/promises').readFile;
+let join: typeof import('path').join;
+let existsSync: typeof import('fs').existsSync;
+
+let fsAvailable = false;
+try {
+	const fs = await import('fs/promises');
+	const fsSync = await import('fs');
+	const path = await import('path');
+	readdir = fs.readdir;
+	readFile = fs.readFile;
+	join = path.join;
+	existsSync = fsSync.existsSync;
+	fsAvailable = true;
+} catch {
+	// fs not available (e.g. Cloudflare Workers) — stats page returns empty data
+}
 
 interface AccessLog {
 	timestamp: string;
@@ -269,6 +284,21 @@ async function aggregateAnalytics(logs: AccessLog[]): Promise<AnalyticsData> {
 }
 
 export async function load() {
+	if (!fsAvailable) {
+		return {
+			analytics: {
+				totalViews: 0,
+				uniqueVisitors: 0,
+				topPages: [],
+				topReferrers: [],
+				countries: [],
+				timeSeries: [],
+				avgResponseTime: 0,
+				statusCodeBreakdown: {}
+			} satisfies AnalyticsData
+		};
+	}
+
 	const logs = await readLogFiles();
 	const analytics = await aggregateAnalytics(logs);
 

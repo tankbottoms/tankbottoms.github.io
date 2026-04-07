@@ -1,0 +1,20 @@
+name = "blog-atsignhandle-xyz"
+main = ".svelte-kit/cloudflare/_worker.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+preview_urls = true
+
+# Uncomment when ready to go live on the custom domain:
+# routes = [
+#   { pattern = "blog.atsignhandle.xyz", zone_id = "c06ee60aca7b559bf4c19bc9f29fd8a5" },
+#   { pattern = "blog.atsignhandle.xyz/*", zone_id = "c06ee60aca7b559bf4c19bc9f29fd8a5" }
+# ]
+
+[observability.logs]
+enabled = true
+invocation_logs = true
+
+[assets]
+binding = "ASSETS"
+directory = ".svelte-kit/cloudflare"

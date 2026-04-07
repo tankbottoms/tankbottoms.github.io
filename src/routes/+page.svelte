@@ -5,15 +5,15 @@
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import NapRating from '$lib/components/NapRating.svelte';
-	import NapFilter from '$lib/components/NapFilter.svelte';
-	import WhiskersLoader from '$lib/components/WhiskersLoader.svelte';
+	import SignificanceRating from '$lib/components/SignificanceRating.svelte';
+	import SignificanceFilter from '$lib/components/SignificanceFilter.svelte';
+	import PortfolioLoader from '$lib/components/PortfolioLoader.svelte';
 	import { createVisibilityPrefetcher, queueTimelineEntryPrefetch } from '$lib/utils/prefetch';
 
 	let { data } = $props();
 	let prefetchObserver: IntersectionObserver | null = $state(null);
 	let stats = $state($statistics);
-	let napFilter = $state<number | null>($userSettings.severityFilter);
+	let significanceFilter = $state<number | null>($userSettings.severityFilter);
 	let scrollDebounceTimer: ReturnType<typeof setTimeout>;
 	let isLoading = $state(true);
 	let activeYearElement = $state<HTMLElement | null>(null);
@@ -25,11 +25,13 @@
 		name: string;
 		shortName: string;
 		description: string;
+		extendedDescription?: string;
 		color: string;
 		icon: string;
 	};
 
 	let categories = $state<ResearchCategory[]>([]);
+	let selectedCategory = $state<string | null>(null);
 
 	async function loadCategories() {
 		try {
@@ -43,6 +45,52 @@
 		}
 	}
 
+	function selectCategory(id: string) {
+		selectedCategory = selectedCategory === id ? null : id;
+	}
+
+	function clearCategoryFilter() {
+		selectedCategory = null;
+	}
+
+	const selectedCategoryInfo = $derived(
+		selectedCategory ? categories.find(c => c.id === selectedCategory) : null
+	);
+
+	// Stats for filtered posts
+	const filteredStats = $derived(() => {
+		const posts = filteredPosts;
+		if (posts.length === 0) return { entries: 0, words: 0, chars: 0, earliest: '', latest: '' };
+
+		let totalWords = 0;
+		let totalChars = 0;
+		let earliest = '';
+		let latest = '';
+
+		for (const post of posts) {
+			totalWords += post.metadata.wordCount || 0;
+			// Estimate chars from words (avg 5.5 chars/word + spaces)
+			totalChars += (post.metadata.wordCount || 0) * 6;
+
+			const d = post.metadata.date;
+			if (d) {
+				if (!earliest || d < earliest) earliest = d;
+				if (!latest || d > latest) latest = d;
+			}
+		}
+
+		return { entries: posts.length, words: totalWords, chars: totalChars, earliest, latest };
+	});
+
+	function formatDateRange(earliest: string, latest: string): string {
+		if (!earliest || !latest) return '';
+		const e = new Date(earliest);
+		const l = new Date(latest);
+		const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+		if (e.getTime() === l.getTime()) return fmt(e);
+		return `${fmt(e)} to ${fmt(l)}`;
+	}
+
 	// Subscribe to statistics changes
 	statistics.subscribe((value) => {
 		stats = value;
@@ -53,9 +101,9 @@
 		statistics.incrementViews();
 		loadCategories();
 
-		// Load saved nap filter
+		// Load saved significance filter
 		const unsubscribe = userSettings.subscribe((settings) => {
-			napFilter = settings.severityFilter;
+			significanceFilter = settings.severityFilter;
 		});
 
 		// Restore scroll position after a brief delay to ensure content is rendered
@@ -97,13 +145,14 @@
 
 	// Category colors for marker animation
 	const markerColors = [
-		'#9c27b0', // purple (naps)
-		'#ff9800', // orange (toys)
-		'#f44336', // red (things to knock over)
-		'#607d8b', // blue-grey (mondays)
-		'#ff5722', // deep orange (lasagna)
-		'#e91e63', // pink (owner appreciation)
-		'#795548'  // brown (pet peeves)
+		'#1565c0', // blue (embedded)
+		'#6a1b9a', // purple (patents)
+		'#e65100', // orange (retail)
+		'#00838f', // teal (payments)
+		'#7b1fa2', // violet (web3)
+		'#2e7d32', // green (ai/llm)
+		'#c62828', // red (legal)
+		'#37474f'  // slate (crypto)
 	];
 
 	let isScrolling = $state(false);
@@ -188,17 +237,26 @@
 	// Special value -1 indicates "featured only" filter
 	const FEATURED_FILTER = -1;
 
-	// Filter posts based on nap-worthiness level or featured flag
+	// Filter posts based on significance level, featured flag, and category
 	const filteredPosts = $derived(
-		napFilter === null
-			? data.posts
-			: napFilter === FEATURED_FILTER
-				? data.posts.filter((post: any) => post.metadata.featured === true)
-				: data.posts.filter((post: any) => {
-						const napScore = post.metadata.napScore;
-						const minNapScore = napFilter as number;
-						return napScore !== undefined && napScore >= minNapScore;
-					})
+		data.posts.filter((post: any) => {
+			// Nap filter
+			if (significanceFilter !== null) {
+				if (significanceFilter === FEATURED_FILTER) {
+					if (post.metadata.featured !== true) return false;
+				} else {
+					const significance = post.metadata.significance;
+					if (significance === undefined || significance < (significanceFilter as number)) return false;
+				}
+			}
+
+			// Category filter (single-select)
+			if (selectedCategory) {
+				if (!post.metadata.research || !post.metadata.research.includes(selectedCategory)) return false;
+			}
+
+			return true;
+		})
 	);
 
 	// Group posts by year and month
@@ -254,7 +312,7 @@
 	});
 
 	function handleFilterChange(level: number | null) {
-		napFilter = level;
+		significanceFilter = level;
 		userSettings.setSeverityFilter(level);
 	}
 
@@ -311,41 +369,60 @@
 </script>
 
 <svelte:head>
-	<title>Mr. Whiskers Blog | A Feline Perspective</title>
-	<meta name="description" content="Documenting feline observations, research, and adventures since 2018" />
+	<title>atsignhandle.xyz | Development Portfolio</title>
+	<meta name="description" content="Development portfolio documenting embedded systems, patents, content delivery, mobile payments, Web3, AI/LLM tooling, and legal tech" />
 </svelte:head>
 
 <div class="page-wrapper">
 	{#if isLoading}
 		<div class="loader-container">
-			<WhiskersLoader message="Loading timeline..." />
+			<PortfolioLoader message="Loading portfolio..." />
 		</div>
 	{:else}
-	<div class="intro">
-		<p>
-			<strong>Mr. Whiskers Blog</strong> documents the profound observations, scientific research, and daily adventures of a distinguished feline scholar. Each entry presents carefully researched analysis of topics ranging from optimal napping positions to the physics of knocking objects off elevated surfaces.
-		</p>
-		<p class="intro-stats">
-			This timeline comprises <strong>22 entries</strong> across <strong>8 research categories</strong>, documenting observations spanning January 2018 to December 2025. Topics include <strong>naps</strong>, <strong>toys</strong>, <strong>things to knock over</strong>, <strong>Mondays</strong>, <strong>lasagna</strong>, and more.
-		</p>
-		<p class="intro-rating">
-			Each entry is rated by nap-worthiness - because the best content is the kind that makes you sleepy. The more whiskers, the more nap-inducing the topic. Click a whisker to filter by nap-worthiness.
-		</p>
-		<p class="intro-featured">
-			The sixth whisker marks <strong>featured posts</strong> - comprehensive analyses denoted by the special timeline marker and border. These entries represent Mr. Whiskers' most important research findings.
-		</p>
-		<div class="filter-row">
-			<span class="filter-label">Filter by nap-worthiness:</span>
-			<NapFilter selectedLevel={napFilter} onFilterChange={handleFilterChange} />
-		</div>
-		{#if napFilter !== null}
-			<p class="filter-status">
-				{#if napFilter === FEATURED_FILTER}
-					Showing {filteredPosts.length} featured entries
-				{:else}
-					Showing {filteredPosts.length} of {data.posts.length} entries with nap-worthiness {napFilter}+
-				{/if}
+	<div class="intro" style={selectedCategoryInfo ? `border-left: 3px solid ${selectedCategoryInfo.color};` : ''}>
+		{#if selectedCategoryInfo}
+			{@const s = filteredStats()}
+			<h2 class="intro-title" style="color: {selectedCategoryInfo.color};">
+				<i class="fat {selectedCategoryInfo.icon}"></i> {selectedCategoryInfo.name}
+			</h2>
+			<p class="intro-description">{selectedCategoryInfo.extendedDescription || selectedCategoryInfo.description}</p>
+			<p class="intro-narrative-stats">
+				This collection comprises {s.entries} {s.entries === 1 ? 'entry' : 'entries'} totaling approximately {s.words.toLocaleString()} words and {s.chars.toLocaleString()} characters{#if s.earliest}, spanning {formatDateRange(s.earliest, s.latest)}{/if}.
 			</p>
+		{:else}
+			{@const s = filteredStats()}
+			<p>
+				<strong>atsignhandle.xyz</strong> chronicles projects spanning three decades of development -- from fixed-point audio codecs and embedded media players to retail kiosk platforms, mobile payment protocols, digital content distribution systems, Web3 smart contracts, cryptographic privacy tools, digital forensics, and AI/LLM agent development. The portfolio includes 11 patents, 55+ open source repositories, and projects in HITL testing, NFC transactions, NFT marketplaces, document intelligence, and browser automation.
+			</p>
+			<p class="intro-narrative-stats">
+				This timeline comprises {s.entries} entries across {categories.length} categories totaling approximately {s.words.toLocaleString()} words and {s.chars.toLocaleString()} characters{#if s.earliest}, spanning {formatDateRange(s.earliest, s.latest)}{/if}. Each entry is rated by significance -- the more stars, the greater the impact.
+			</p>
+		{/if}
+		<div class="filter-row">
+			<span class="filter-label">Filter by significance:</span>
+			<SignificanceFilter selectedLevel={significanceFilter} onFilterChange={handleFilterChange} />
+		</div>
+		{#if categories.length > 0}
+			<div class="filter-row category-filter-row">
+				<span class="filter-label">Research:</span>
+				<div class="category-filters">
+					{#each categories as category}
+						<button
+							class="cat-filter-badge"
+							class:active={selectedCategory === category.id}
+							style="--badge-color: {category.color};"
+							onclick={() => selectCategory(category.id)}
+							title="{category.name}: {category.description}"
+						>
+							<i class="fat {category.icon}"></i>
+							{category.shortName}
+						</button>
+					{/each}
+					{#if selectedCategory}
+						<button class="cat-toggle" onclick={clearCategoryFilter}>all</button>
+					{/if}
+				</div>
+			</div>
 		{/if}
 	</div>
 
@@ -378,7 +455,7 @@
 													{post.metadata.blurb}{#if post.metadata.wordCount && post.metadata.readingTimeText}<span class="reading-stats"> * {post.metadata.wordCount.toLocaleString()} words * {post.metadata.readingTimeText}</span>{/if}{#if visitInfo}<span class="visit-info"> * {visitInfo}</span>{/if}
 												</p>
 											{/if}
-											{#if post.metadata.napScore || post.metadata.research}
+											{#if post.metadata.significance || post.metadata.research}
 												<div class="timeline-meta">
 													<div class="timeline-badges-left">
 														{#if post.metadata.research && categories.length > 0}
@@ -398,9 +475,9 @@
 															</div>
 														{/if}
 													</div>
-													{#if post.metadata.napScore}
-														<div class="timeline-nap-rating">
-															<NapRating rating={post.metadata.napScore} size="sm" />
+													{#if post.metadata.significance}
+														<div class="timeline-significance-rating">
+															<SignificanceRating rating={post.metadata.significance} size="sm" />
 														</div>
 													{/if}
 												</div>
@@ -418,29 +495,11 @@
 	{/each}
 	{#if filteredPosts.length === 0}
 		<div class="no-results">
-			<p>No entries match the selected nap-worthiness filter.</p>
-			<button onclick={() => handleFilterChange(null)}>Clear filter</button>
+			<p>No entries match the selected filters.</p>
+			<button onclick={() => { handleFilterChange(null); clearCategoryFilter(); }}>Clear filters</button>
 		</div>
 	{/if}
 </div>
-
-<!-- Research Category Legend -->
-{#if categories.length > 0}
-	<div class="category-legend">
-		<h4>Research Categories</h4>
-		<div class="legend-items">
-			{#each categories as category}
-				<span
-					class="legend-category"
-					style="background-color: {category.color}20; border-color: {category.color}; color: {category.color};"
-					title="{category.name}: {category.description}">
-					<i class="fat {category.icon}"></i>
-					{category.shortName}
-				</span>
-			{/each}
-		</div>
-	</div>
-{/if}
 {/if}
 </div>
 
@@ -459,7 +518,13 @@
 
 	.intro {
 		margin-bottom: 2rem;
-		padding: 1rem 0;
+		padding: 0;
+		margin-top: -0.5rem;
+		transition: border-color 0.2s ease, padding-left 0.2s ease;
+	}
+
+	.intro[style*="border-left"] {
+		padding-left: 1rem;
 	}
 
 	.intro p {
@@ -472,33 +537,30 @@
 		margin-bottom: 0;
 	}
 
-	.intro-rating {
+	.intro-title {
+		font-family: var(--font-serif);
+		font-size: 1.5rem;
+		margin: 0 0 0.75rem 0;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.intro-title i {
+		font-size: 1.25rem;
+	}
+
+	.intro-description {
 		font-size: 0.9rem;
-		color: var(--color-text-muted);
-	}
-
-	.intro-stats {
-		font-size: 0.85rem;
-		color: var(--color-text-muted);
-		background: var(--color-bg-secondary);
-		border: 1px solid var(--color-border);
-		border-radius: 5px;
-		padding: 0.75rem 1rem;
-		margin-top: 0.5rem;
-		line-height: 1.6;
-	}
-
-	.intro-stats strong {
 		color: var(--color-text);
-		font-family: var(--font-mono);
+		line-height: 1.7;
 	}
 
-	.intro-featured {
-		font-size: 0.9rem;
+	.intro-narrative-stats {
+		font-size: 0.8rem;
 		color: var(--color-text-muted);
-		border-left: 3px solid #9c27b0;
-		padding-left: 0.75rem;
-		margin-left: 0;
+		font-family: var(--font-mono);
+		line-height: 1.6;
 	}
 
 	.filter-row {
@@ -513,17 +575,73 @@
 		font-size: 0.8rem;
 		color: var(--color-text-muted);
 		font-family: var(--font-mono, monospace);
+		white-space: nowrap;
 	}
 
-	.filter-status {
-		font-size: 0.75rem;
-		color: var(--color-link);
-		font-family: var(--font-mono, monospace);
-		margin-top: 0.5rem !important;
-		padding: 0.25rem 0.5rem;
-		background: var(--color-bg-secondary);
+	.category-filter-row {
+		margin-top: 0.25rem;
+		padding-top: 0.25rem;
+		flex-wrap: wrap;
+	}
+
+	.category-filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+		align-items: center;
+	}
+
+	.cat-filter-badge {
+		font-family: var(--font-mono);
+		font-size: 0.6rem;
+		padding: 0.2rem 0.45rem;
+		border: 1px solid var(--badge-color);
 		border-radius: 3px;
-		display: inline-block;
+		background: color-mix(in srgb, var(--badge-color) 10%, transparent);
+		color: var(--badge-color);
+		cursor: pointer;
+		transition: all 0.15s ease;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		opacity: 0.6;
+	}
+
+	.cat-filter-badge i {
+		font-size: 0.7rem;
+	}
+
+	.cat-filter-badge.active {
+		background: color-mix(in srgb, var(--badge-color) 20%, transparent);
+		color: var(--badge-color);
+		opacity: 1;
+		box-shadow: 2px 2px 0px var(--color-shadow);
+	}
+
+	.cat-filter-badge:hover {
+		opacity: 1;
+		transform: translateY(-1px);
+	}
+
+	.cat-toggle {
+		font-family: var(--font-mono);
+		font-size: 0.55rem;
+		padding: 0.15rem 0.35rem;
+		border: 1px solid var(--color-border);
+		border-radius: 3px;
+		background: var(--color-bg);
+		color: var(--color-text-muted);
+		cursor: pointer;
+		transition: background 0.15s;
+	}
+
+	.cat-toggle:hover:not(:disabled) {
+		background: var(--color-hover-bg);
+	}
+
+	.cat-toggle:disabled {
+		opacity: 0.3;
+		cursor: default;
 	}
 
 	.timeline-container {
@@ -560,19 +678,20 @@
 
 	:global(.year-marker.sticky-active) .year-text {
 		opacity: 1;
-		color: #9c27b0;
+		color: #7b1fa2;
 	}
 
 	/* Color cycling animation during scroll */
 	@keyframes marker-color-cycle {
-		0% { color: #9c27b0; }
-		14% { color: #ff9800; }
-		28% { color: #f44336; }
-		42% { color: #607d8b; }
-		57% { color: #ff5722; }
-		71% { color: #e91e63; }
-		85% { color: #795548; }
-		100% { color: #9c27b0; }
+		0% { color: #1565c0; }
+		12% { color: #6a1b9a; }
+		25% { color: #e65100; }
+		37% { color: #00838f; }
+		50% { color: #7b1fa2; }
+		62% { color: #2e7d32; }
+		75% { color: #c62828; }
+		87% { color: #37474f; }
+		100% { color: #1565c0; }
 	}
 
 	:global(.page-scrolling .year-marker.sticky-active) .year-text {
@@ -613,7 +732,7 @@
 	}
 
 	:global(.month-marker.sticky-active) .month-text {
-		color: #9c27b0;
+		color: #7b1fa2;
 	}
 
 	:global(.page-scrolling .month-marker.sticky-active) .month-text {
@@ -784,7 +903,7 @@
 		opacity: 0.9;
 	}
 
-	.timeline-nap-rating {
+	.timeline-significance-rating {
 		flex-shrink: 0;
 	}
 
@@ -813,51 +932,6 @@
 	}
 
 	.category-badge:hover {
-		transform: translateY(-1px);
-		box-shadow: 2px 2px 0px var(--color-shadow);
-	}
-
-	/* Research Category Legend */
-	.category-legend {
-		margin: 2rem 0 1rem 115px;
-		padding: 1rem;
-		background: var(--color-bg-secondary);
-		border: 1px solid var(--color-border);
-		border-radius: 5px;
-	}
-
-	.category-legend h4 {
-		margin: 0 0 0.75rem 0;
-		font-size: 0.875rem;
-		color: var(--color-text);
-		font-weight: 600;
-	}
-
-	.legend-items {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.legend-category {
-		font-size: 0.7rem;
-		padding: 0.25rem 0.5rem;
-		border: 1px solid;
-		border-radius: 3px;
-		font-family: var(--font-mono);
-		white-space: nowrap;
-		cursor: help;
-		transition: all 0.2s;
-		display: inline-flex;
-		align-items: center;
-		gap: 0.3rem;
-	}
-
-	.legend-category i {
-		font-size: 0.8rem;
-	}
-
-	.legend-category:hover {
 		transform: translateY(-1px);
 		box-shadow: 2px 2px 0px var(--color-shadow);
 	}
@@ -937,7 +1011,7 @@
 			min-width: 0;
 		}
 
-		.timeline-nap-rating {
+		.timeline-significance-rating {
 			flex-shrink: 0;
 			margin-left: auto;
 		}

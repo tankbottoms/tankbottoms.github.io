@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/Icon.svelte';
-	import FloatingWhiskersNav from '$lib/components/FloatingWhiskersNav.svelte';
+	import FloatingNav from '$lib/components/FloatingNav.svelte';
 	import { downloadPdf, downloadWord, downloadMd } from '$lib/utils/download';
 	import { initDiagramModal } from '$lib/utils/diagramModal';
 	import { page } from '$app/stores';
@@ -143,42 +143,50 @@
 		return categories.find(c => c.id === categoryId);
 	}
 
-	// Tag color mapping based on categories
+	// Tag color mapping based on domain
 	function getTagColor(tag: string): string {
 		const tagLower = tag.toLowerCase();
-		// Sleep related
-		if (tagLower.includes('nap') || tagLower.includes('sleep') || tagLower.includes('rest')) {
-			return '#9c27b0'; // Purple
+		// Patent related
+		if (tagLower.includes('patent')) {
+			return '#6a1b9a'; // Purple
 		}
-		// Play/Toys related
-		if (tagLower.includes('toy') || tagLower.includes('play') || tagLower.includes('chase')) {
-			return '#ff9800'; // Orange
+		// Hardware/Embedded
+		if (tagLower.includes('dsp') || tagLower.includes('embedded') || tagLower.includes('firmware') || tagLower.includes('hardware')) {
+			return '#1565c0'; // Blue
 		}
-		// Food related
-		if (tagLower.includes('food') || tagLower.includes('lasagna') || tagLower.includes('treat')) {
-			return '#ef5350'; // Red
+		// Payments/Fintech
+		if (tagLower.includes('payment') || tagLower.includes('fintech') || tagLower.includes('wallet')) {
+			return '#00838f'; // Teal
 		}
-		// Chaos/Destruction
-		if (tagLower.includes('chaos') || tagLower.includes('knock') || tagLower.includes('destroy')) {
-			return '#f44336'; // Deep Red
+		// Web3/Blockchain
+		if (tagLower.includes('solidity') || tagLower.includes('ethereum') || tagLower.includes('nft') || tagLower.includes('dao') || tagLower.includes('web3')) {
+			return '#7b1fa2'; // Violet
 		}
-		// Comfort/Warmth
-		if (tagLower.includes('warm') || tagLower.includes('sun') || tagLower.includes('cozy')) {
-			return '#ffeb3b'; // Yellow
+		// AI/LLM
+		if (tagLower.includes('llm') || tagLower.includes('ai') || tagLower.includes('mcp') || tagLower.includes('ocr')) {
+			return '#2e7d32'; // Green
+		}
+		// Legal/Forensics
+		if (tagLower.includes('legal') || tagLower.includes('forensic') || tagLower.includes('sec') || tagLower.includes('edgar')) {
+			return '#c62828'; // Red
+		}
+		// Retail/Content
+		if (tagLower.includes('kiosk') || tagLower.includes('retail') || tagLower.includes('content')) {
+			return '#e65100'; // Orange
 		}
 		// Default
-		return '#66bb6a'; // Green
+		return '#37474f'; // Slate
 	}
 </script>
 
 <svelte:head>
-	<title>{data.metadata.title || 'Blog Post'} | Mr. Whiskers Blog</title>
+	<title>{data.metadata.title || 'Post'} | atsignhandle.xyz</title>
 	{#if data.metadata.blurb}
 		<meta name="description" content={data.metadata.blurb} />
 	{/if}
 </svelte:head>
 
-<FloatingWhiskersNav />
+<FloatingNav />
 
 <article class="post">
 	<nav class="post-nav-top">
@@ -297,8 +305,6 @@
 	.post {
 		padding: 2rem 0;
 		padding-top: 40px;
-		max-width: 1200px;
-		margin: 0 auto;
 	}
 
 	.post-nav-top {

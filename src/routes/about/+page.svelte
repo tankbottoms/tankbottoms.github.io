@@ -1,92 +1,83 @@
 <script lang="ts">
 	import { base } from '$app/paths';
+	import { onMount } from 'svelte';
 	import ContactPopup from '$lib/components/ContactPopup.svelte';
 
 	let showContact = $state(false);
+
+	type ResearchCategory = {
+		id: string;
+		name: string;
+		shortName: string;
+		description: string;
+		color: string;
+		icon: string;
+	};
+
+	let categories = $state<ResearchCategory[]>([]);
+
+	onMount(async () => {
+		try {
+			const response = await fetch(`${base}/json/research-categories.json`);
+			const data = await response.json();
+			categories = data.categories || [];
+		} catch {}
+	});
 </script>
 
 <svelte:head>
-	<title>About Mr. Whiskers | Mr. Whiskers Blog</title>
-	<meta name="description" content="Learn about Mr. Whiskers, a distinguished feline scholar documenting observations since 2018" />
+	<title>About | atsignhandle.xyz</title>
+	<meta name="description" content="Development portfolio spanning embedded systems, content delivery, mobile payments, Web3, AI/LLM tooling, and legal tech" />
 </svelte:head>
 
 <div class="about-page">
-	<h1>About Mr. Whiskers</h1>
-
 	<div class="about-content">
 		<div class="hero-section">
-			<img src="{base}/images/mrwhiskers-me.svg" alt="Mr. Whiskers" class="hero-image" />
+			<img src="{base}/images/mrwhiskers-me.svg" alt="atsignhandle" class="hero-image" />
 			<div class="hero-text">
-				<p class="tagline">A Distinguished Feline Scholar</p>
-				<p class="subtitle">Documenting observations since 2018</p>
+				<h1>atsignhandle.xyz</h1>
+				<p class="subtitle">Development and Interests</p>
 			</div>
 		</div>
 
-		<section class="stats-section">
-			<h2><i class="fat fa-trophy"></i> Achievements</h2>
-			<div class="stats-grid">
-				<div class="stat-card">
-					<i class="fat fa-glass-water stat-icon"></i>
-					<span class="stat-number">2,847</span>
-					<span class="stat-label">Objects Knocked Over</span>
-				</div>
-				<div class="stat-card">
-					<i class="fat fa-bed stat-icon"></i>
-					<span class="stat-number">14,392</span>
-					<span class="stat-label">Hours Napped</span>
-				</div>
-				<div class="stat-card">
-					<i class="fat fa-music stat-icon"></i>
-					<span class="stat-number">573</span>
-					<span class="stat-label">3 AM Serenades</span>
-				</div>
-				<div class="stat-card">
-					<i class="fat fa-cookie-bite stat-icon"></i>
-					<span class="stat-number"><i class="fat fa-infinity"></i></span>
-					<span class="stat-label">Treats Demanded</span>
-				</div>
-			</div>
-		</section>
-
-		<section class="bio-section">
-			<h2><i class="fat fa-cat"></i> Biography</h2>
-			<p>
-				Mr. Whiskers is a distinguished orange tabby with a passion for scientific inquiry and a deep appreciation for the finer things in life: warm sunbeams, cardboard boxes, and the occasional slice of lasagna.
-			</p>
-			<p>
-				Born in the spring of 2017, Mr. Whiskers quickly established himself as a keen observer of household phenomena. His groundbreaking research into optimal napping positions has been cited by cats worldwide, and his treatise on "The Physics of Knocking Objects Off Tables" remains a seminal work in the field of feline chaos theory.
-			</p>
-			<p>
-				When not engaged in rigorous research, Mr. Whiskers can be found staring judgmentally at closed doors, demanding treats at precisely 3:47 AM, or contemplating the eternal mysteries of the red dot.
-			</p>
-		</section>
+		<p class="narrative">
+			This portfolio documents work across embedded systems, enterprise content delivery, mobile payments, blockchain, AI/LLM tooling, and legal technology. Browse the timeline for patents, products, and open source projects spanning these domains.
+		</p>
 
 		<section class="interests-section">
-			<h2><i class="fat fa-heart"></i> Research Interests</h2>
-			<div class="interests-grid">
-				<div class="interest-card">
-					<h3><i class="fat fa-bed"></i> Sleep Science</h3>
-					<p>Optimal napping positions, sunbeam tracking, and the art of sleeping 18 hours a day</p>
+			<h2><i class="fat fa-layer-group"></i> Categories</h2>
+			{#if categories.length > 0}
+				<div class="interest-badges">
+					{#each categories as category}
+						<a
+							href="{base}/research/{category.id}"
+							class="interest-badge"
+							style="--badge-color: {category.color};"
+							title="{category.description}"
+						>
+							<i class="fat {category.icon}"></i>
+							{category.name}
+						</a>
+					{/each}
 				</div>
-				<div class="interest-card">
-					<h3><i class="fat fa-box"></i> Box Theory</h3>
-					<p>Why if I fits, I sits. A comprehensive analysis of cardboard container habitation</p>
+			{:else}
+				<div class="interest-badges">
+					<span class="interest-badge" style="--badge-color: #1565c0;"><i class="fat fa-microchip"></i> Embedded Systems</span>
+					<span class="interest-badge" style="--badge-color: #6a1b9a;"><i class="fat fa-file-certificate"></i> Patents</span>
+					<span class="interest-badge" style="--badge-color: #e65100;"><i class="fat fa-store"></i> Content Delivery</span>
+					<span class="interest-badge" style="--badge-color: #00838f;"><i class="fat fa-mobile-screen-button"></i> Mobile Payments</span>
+					<span class="interest-badge" style="--badge-color: #7b1fa2;"><i class="fat fa-cube"></i> Web3/NFT/DAO</span>
+					<span class="interest-badge" style="--badge-color: #2e7d32;"><i class="fat fa-brain"></i> AI/LLM Tools</span>
+					<span class="interest-badge" style="--badge-color: #c62828;"><i class="fat fa-scale-balanced"></i> Legal Tech</span>
+					<span class="interest-badge" style="--badge-color: #37474f;"><i class="fat fa-shield-halved"></i> Cryptography</span>
 				</div>
-				<div class="interest-card">
-					<h3><i class="fat fa-glass-water"></i> Applied Physics</h3>
-					<p>Gravitational experiments involving objects and elevated surfaces</p>
-				</div>
-				<div class="interest-card">
-					<h3><i class="fat fa-utensils"></i> Culinary Arts</h3>
-					<p>The superior taste of lasagna and why all other foods are inferior</p>
-				</div>
-			</div>
+			{/if}
 		</section>
 
 		<section class="contact-section">
 			<h2><i class="fat fa-envelope"></i> Contact</h2>
 			<p>
-				Mr. Whiskers is available for consultations on matters of feline importance. Please note that responses may be delayed due to nap schedules.
+				For inquiries about consulting, collaboration, or licensing, please get in touch.
 			</p>
 			<button class="contact-button" onclick={() => showContact = true}>
 				<i class="fat fa-paper-plane"></i> Send a Message
@@ -103,65 +94,58 @@
 	.about-page {
 		max-width: 750px;
 		margin: 0 auto;
-		padding: 2rem 0;
-	}
-
-	h1 {
-		font-family: var(--font-serif);
-		font-size: 2.5rem;
-		margin-bottom: 2rem;
-		color: var(--color-text);
+		padding: 1rem 0;
 	}
 
 	.hero-section {
 		display: flex;
 		align-items: center;
-		gap: 2rem;
-		margin-bottom: 3rem;
-		padding: 2rem;
-		background: var(--color-bg-secondary);
-		border: 1px solid var(--color-border);
-		border-radius: 5px;
+		gap: 1.5rem;
+		margin-bottom: 1.5rem;
 	}
 
 	.hero-image {
-		width: 150px;
-		height: 150px;
+		width: 80px;
+		height: 80px;
 		animation: float 3s ease-in-out infinite;
 	}
 
 	@keyframes float {
 		0%, 100% { transform: translateY(0); }
-		50% { transform: translateY(-10px); }
+		50% { transform: translateY(-6px); }
 	}
 
-	.hero-text {
-		flex: 1;
-	}
-
-	.tagline {
+	h1 {
 		font-family: var(--font-serif);
-		font-size: 1.5rem;
+		font-size: 2rem;
+		margin: 0;
 		color: var(--color-text);
-		margin: 0 0 0.5rem 0;
 	}
 
 	.subtitle {
 		font-family: var(--font-mono);
-		font-size: 0.875rem;
+		font-size: 0.8rem;
 		color: var(--color-text-muted);
-		margin: 0;
+		margin: 0.25rem 0 0 0;
+	}
+
+	.narrative {
+		line-height: 1.7;
+		color: var(--color-text);
+		margin-bottom: 1rem;
+		font-size: 0.95rem;
 	}
 
 	section {
-		margin-bottom: 3rem;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
 	}
 
 	h2 {
 		font-family: var(--font-serif);
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 		color: var(--color-text);
-		margin-bottom: 1rem;
+		margin-bottom: 0.75rem;
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
@@ -169,124 +153,59 @@
 
 	h2 i {
 		color: var(--color-text-muted);
-		font-size: 1.25rem;
-	}
-
-	.bio-section p {
-		line-height: 1.7;
-		color: var(--color-text);
-		margin-bottom: 1rem;
-	}
-
-	.interests-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 1rem;
-	}
-
-	.interest-card {
-		padding: 1.25rem;
-		background: var(--color-bg-secondary);
-		border: 1px solid var(--color-border);
-		border-radius: 5px;
-		transition: all 0.2s;
-	}
-
-	.interest-card:hover {
-		border-color: var(--color-border-dark);
-		box-shadow: 2px 2px 0px var(--color-shadow);
-	}
-
-	.interest-card h3 {
-		font-family: var(--font-serif);
 		font-size: 1rem;
-		color: var(--color-text);
-		margin: 0 0 0.5rem 0;
+	}
+
+	.interest-badges {
 		display: flex;
-		align-items: center;
+		flex-wrap: wrap;
 		gap: 0.5rem;
 	}
 
-	.interest-card h3 i {
-		color: #9c27b0;
-	}
-
-	.interest-card p {
-		font-size: 0.875rem;
-		color: var(--color-text-muted);
-		margin: 0;
-		line-height: 1.5;
-	}
-
-	.stats-section {
-		margin-bottom: 3rem;
-	}
-
-	.stats-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-		gap: 1rem;
-	}
-
-	.stat-card {
-		padding: 1.5rem 1rem;
-		background: var(--color-bg-secondary);
-		border: 1px solid var(--color-border);
-		border-radius: 5px;
-		text-align: center;
-		transition: all 0.2s;
-	}
-
-	.stat-card:hover {
-		border-color: var(--color-border-dark);
-		box-shadow: 2px 2px 0px var(--color-shadow);
-		transform: translateY(-2px);
-	}
-
-	.stat-icon {
-		display: block;
-		font-size: 1.75rem;
-		color: #9c27b0;
-		margin-bottom: 0.75rem;
-	}
-
-	.stat-number {
-		display: block;
+	.interest-badge {
 		font-family: var(--font-mono);
-		font-size: 1.75rem;
-		font-weight: 700;
-		color: var(--color-text);
-		margin-bottom: 0.25rem;
-	}
-
-	.stat-number i {
-		color: #9c27b0;
-	}
-
-	.stat-label {
 		font-size: 0.75rem;
-		color: var(--color-text-muted);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		padding: 0.35rem 0.65rem;
+		border: 1px solid var(--badge-color);
+		border-radius: 3px;
+		background: color-mix(in srgb, var(--badge-color) 12%, transparent);
+		color: var(--badge-color);
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		transition: all 0.15s ease;
+		cursor: pointer;
+	}
+
+	.interest-badge:hover {
+		transform: translateY(-1px);
+		box-shadow: 2px 2px 0px var(--color-shadow);
+		background: color-mix(in srgb, var(--badge-color) 20%, transparent);
+	}
+
+	.interest-badge i {
+		font-size: 0.85rem;
 	}
 
 	.contact-section p {
 		color: var(--color-text);
 		margin-bottom: 1rem;
 		line-height: 1.6;
+		font-size: 0.95rem;
 	}
 
 	.contact-button {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
-		padding: 0.75rem 1.5rem;
+		padding: 0.6rem 1.25rem;
 		background: var(--color-bg-secondary);
 		border: 1px solid var(--color-border);
 		border-radius: 5px;
 		color: var(--color-text);
 		font-family: var(--font-mono);
-		font-size: 0.875rem;
+		font-size: 0.8rem;
 		cursor: pointer;
 		transition: all 0.2s;
 	}
@@ -298,12 +217,16 @@
 
 	@media (max-width: 640px) {
 		.hero-section {
-			flex-direction: column;
-			text-align: center;
+			gap: 1rem;
+		}
+
+		.hero-image {
+			width: 60px;
+			height: 60px;
 		}
 
 		h1 {
-			font-size: 2rem;
+			font-size: 1.5rem;
 		}
 	}
 </style>

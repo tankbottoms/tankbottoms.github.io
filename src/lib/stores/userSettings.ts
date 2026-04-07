@@ -20,7 +20,7 @@ interface UserSettings {
 	referrer: ReferrerInfo | null;  // Track where user came from for back navigation
 }
 
-const STORAGE_KEY = 'mrwhiskers_blog_settings';
+const STORAGE_KEY = 'atsignhandle_portfolio_settings';
 
 const defaultSettings: UserSettings = {
 	severityFilter: null,

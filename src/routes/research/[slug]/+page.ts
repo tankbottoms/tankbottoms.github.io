@@ -4,14 +4,14 @@ export const prerender = true;
 export async function entries() {
 	// These are the category IDs from research-categories.json
 	const categoryIds = [
-		'naps',
-		'toys',
-		'things-to-knock-over',
-		'mondays',
-		'lasagna',
-		'owner-appreciation',
-		'pet-peeves',
-		'sunbeams'
+		'embedded-systems',
+		'patents',
+		'content-delivery',
+		'mobile-payments',
+		'web3-blockchain',
+		'ai-llm',
+		'legal-forensics',
+		'cryptography'
 	];
 
 	return categoryIds.map((slug) => ({ slug }));

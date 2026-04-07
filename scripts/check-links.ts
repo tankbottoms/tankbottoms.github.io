@@ -501,7 +501,7 @@ function printResults(results: LinkCheckResult[]): void {
 }
 
 async function main() {
-	console.log('Link Checker for Mr. Whiskers Blog\n');
+	console.log('Link Checker for atsignhandle Portfolio\n');
 	console.log('Configuration:');
 	console.log(`  Source directories: ${SOURCE_DIRS.join(', ')}`);
 	console.log(`  Skip external: ${SKIP_EXTERNAL}`);

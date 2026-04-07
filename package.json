@@ -1,5 +1,5 @@
 {
-	"name": "mrwhiskers-timeline-blog",
+	"name": "atsignhandle-portfolio",
 	"version": "1.0.0",
 	"description": "A minimal timeline-style blog template built with SvelteKit 5",
 	"author": {
@@ -37,11 +37,16 @@
 		"postbuild": "bun run scripts/check-links.ts --skip-external",
 		"download-ipfs-cache": "bun run scripts/download-ipfs-cache.ts",
 		"download-ipfs-cache:check": "bun run scripts/download-ipfs-cache.ts --check",
-		"generate:ux-spec": "bun run scripts/generate-ux-spec.ts"
+		"generate:ux-spec": "bun run scripts/generate-ux-spec.ts",
+		"build:cf": "svelte-kit sync && vite build",
+		"deploy": "bun run build:cf && npx wrangler deploy",
+		"deploy:preview": "bun run build:cf && npx wrangler deploy",
+		"cf:dev": "bun run build:cf && npx wrangler dev"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.57.0",
 		"@sveltejs/adapter-auto": "^3.3.1",
+		"@sveltejs/adapter-cloudflare": "^7.2.8",
 		"@sveltejs/adapter-node": "^5.4.0",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/adapter-vercel": "^6.2.0",
@@ -58,7 +63,8 @@
 		"svelte-check": "^4.3.4",
 		"tailwindcss": "^3.4.19",
 		"typescript": "^5.9.3",
-		"vite": "^5.4.21"
+		"vite": "^5.4.21",
+		"wrangler": "^4.71.0"
 	},
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.958.0",

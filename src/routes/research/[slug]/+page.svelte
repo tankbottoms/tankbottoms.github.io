@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { userSettings } from '$lib/stores/userSettings';
-	import NapRating from '$lib/components/NapRating.svelte';
+	import SignificanceRating from '$lib/components/SignificanceRating.svelte';
 
 	let { data } = $props();
 
@@ -36,13 +36,13 @@
 </script>
 
 <svelte:head>
-	<title>{categoryInfo?.name || 'Research'} | Mr. Whiskers Blog</title>
+	<title>{categoryInfo?.name || 'Category'} | atsignhandle.xyz</title>
 	<meta name="description" content="Research entries in the {categoryInfo?.name} category" />
 </svelte:head>
 
 <div class="category-page">
 	<nav class="breadcrumb">
-		<a href="{base}/research">&larr; All Categories</a>
+		<a href="{base}/">&larr; Timeline</a>
 	</nav>
 
 	{#if categoryInfo}
@@ -61,9 +61,9 @@
 				{#if post.metadata.blurb}
 					<p>{post.metadata.blurb}</p>
 				{/if}
-				{#if post.metadata.napScore}
+				{#if post.metadata.significance}
 					<div class="post-meta">
-						<NapRating rating={post.metadata.napScore} size="sm" />
+						<SignificanceRating rating={post.metadata.significance} size="sm" />
 					</div>
 				{/if}
 			</a>

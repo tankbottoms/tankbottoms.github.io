@@ -300,8 +300,8 @@
 </script>
 
 <svelte:head>
-	<title>Search - Mr. Whiskers Blog</title>
-	<meta name="description" content="Search Mr. Whiskers blog posts and research" />
+	<title>Search - atsignhandle.xyz</title>
+	<meta name="description" content="Search atsignhandle portfolio entries and projects" />
 </svelte:head>
 
 <div class="page-wrapper">

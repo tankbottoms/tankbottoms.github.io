@@ -48,7 +48,7 @@
 {#if !browser || !initialized}
 	<!-- Loading state -->
 	<div class="auth-loading">
-		<img src="{base}/images/mrwhiskers-cat.svg" alt="" class="loading-logo spinning" />
+		<img src="{base}/images/atsignhandle-logo.svg" alt="" class="loading-logo spinning" />
 	</div>
 {:else if !authState.isAuthenticated}
 	<!-- Password entry screen -->
@@ -56,14 +56,14 @@
 		<div class="auth-card">
 			<div class="auth-logo-container">
 				<img
-					src="{base}/images/mrwhiskers-cat.svg"
+					src="{base}/images/atsignhandle-logo.svg"
 					alt=""
 					class="auth-logo"
 					class:spinning={logoSpinning}
 				/>
 			</div>
 
-			<h1 class="auth-title">Mr. Whiskers Blog</h1>
+			<h1 class="auth-title">atsignhandle.xyz</h1>
 			<p class="auth-subtitle">Enter password to access</p>
 
 			<form onsubmit={handlePasswordSubmit} class="auth-form">

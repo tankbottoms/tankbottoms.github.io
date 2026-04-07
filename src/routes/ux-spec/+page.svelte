@@ -7,7 +7,7 @@
 	}
 
 	function exportMarkdown() {
-		const content = `# UX Specification - Mr. Whiskers Blog
+		const content = `# UX Specification - atsignhandle.xyz
 
 Generated: 2026-01-08
 
@@ -265,7 +265,7 @@ input {
 	}
 
 	function exportText() {
-		const content = `UX SPECIFICATION - Mr. Whiskers Blog
+		const content = `UX SPECIFICATION - atsignhandle.xyz
 ==================================================
 Generated: 2026-01-08
 
@@ -437,8 +437,8 @@ For full specification, see: docs/UX_SPECIFICATION.md
 </script>
 
 <svelte:head>
-	<title>UX Specification | Mr. Whiskers Blog</title>
-	<meta name="description" content="Design system documentation for Mr. Whiskers Blog" />
+	<title>UX Specification | atsignhandle.xyz</title>
+	<meta name="description" content="Design system documentation for atsignhandle.xyz" />
 </svelte:head>
 
 <div class="ux-spec-page">
@@ -446,7 +446,7 @@ For full specification, see: docs/UX_SPECIFICATION.md
 		<div class="header-content">
 			<a href="{base}/" class="back-link"><i class="fat fa-arrow-left"></i> Back to Timeline</a>
 			<h1>UX Specification</h1>
-			<p class="subtitle">Design system documentation for Mr. Whiskers Blog</p>
+			<p class="subtitle">Design system documentation for atsignhandle.xyz</p>
 		</div>
 		<div class="export-icons">
 			<button onclick={exportPdf} aria-label="Download PDF" title="Download PDF">
@@ -589,7 +589,7 @@ For full specification, see: docs/UX_SPECIFICATION.md
 		<div class="typography-examples">
 			<div class="type-example">
 				<span class="type-label">H1 - Serif</span>
-				<h1 class="demo-h1">Mr. Whiskers Blog</h1>
+				<h1 class="demo-h1">atsignhandle.xyz</h1>
 				<code>font-family: var(--font-serif); font-size: 2rem;</code>
 			</div>
 			<div class="type-example">
@@ -649,7 +649,7 @@ box-shadow: 2px 2px 0px var(--color-shadow); /* on hover */</code></pre>
 				<h3>Filter Box</h3>
 				<p>Shaded background for controls and filters. No shadow.</p>
 				<div class="example-box filter-box">
-					<span class="filter-label">Filter by nap-worthiness:</span>
+					<span class="filter-label">Filter by significance:</span>
 					<span class="filter-pill">All</span>
 					<span class="filter-pill active">3+</span>
 					<span class="filter-pill">5</span>
@@ -1086,15 +1086,15 @@ transform: scale(1.02);</code></pre>
 		<h3>Quote/Testimony Box</h3>
 		<div class="testimony-box">
 			<p>"The optimal napping position has been scientifically determined to maximize both comfort and sunbeam absorption."</p>
-			<cite>- Mr. Whiskers, PhD</cite>
+			<cite>- atsignhandle</cite>
 		</div>
 
 		<h3>Code Block (Dark)</h3>
 		<div class="code-block">
 			<pre><code>const whiskers = &lbrace;
-  name: 'Mr. Whiskers',
+  name: 'atsignhandle',
   occupation: 'Professional Napper',
-  napScore: 5
+  significance: 5
 &rbrace;;</code></pre>
 		</div>
 	</section>
@@ -1376,10 +1376,10 @@ transform: scale(1.02);</code></pre>
 
 		<dl class="terminology-list">
 			<dt>Nap Score</dt>
-			<dd>1-5 rating displayed as cat icons indicating content's nap-worthiness (relaxation value).</dd>
+			<dd>1-5 star rating indicating content's significance level.</dd>
 
 			<dt>Research Category</dt>
-			<dd>Classification tag for blog entries (naps, toys, knock-over, mondays, lasagna, owner, peeves, sunbeams).</dd>
+			<dd>Classification tag for portfolio entries (embedded-systems, patents, content-delivery, mobile-payments, web3-blockchain, ai-llm, legal-forensics, cryptography).</dd>
 
 			<dt>Featured Entry</dt>
 			<dd>Highlighted timeline item with prominent border and shadow, denoting important research findings.</dd>

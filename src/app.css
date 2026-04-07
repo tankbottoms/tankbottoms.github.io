@@ -635,7 +635,7 @@ svg tspan {
 	fill: #e0e0e0 !important;
 }
 
-/* Whiskers icon styling for name mentions */
+/* Icon styling for name mentions */
 .whiskers-name {
 	display: inline-flex;
 	align-items: center;

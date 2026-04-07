@@ -27,12 +27,12 @@
 			<h2>Privacy & Cookie Notice</h2>
 
 			<div class="info-section">
-				<h3>Welcome to Mr. Whiskers Blog</h3>
+				<h3>Welcome to atsignhandle.xyz</h3>
 				<p>
-					This blog documents the profound observations, scientific research, and daily adventures of a distinguished feline scholar.
+					This portfolio documents a development career spanning embedded systems, enterprise content delivery, mobile payments, Web3, AI/LLM tooling, and legal technology.
 				</p>
 				<p>
-					<strong>Disclaimer:</strong> All nap ratings, research findings, and feline opinions expressed on this site are purely for entertainment purposes. Any resemblance to actual scientific methodology is coincidental.
+					<strong>Notice:</strong> This site uses local storage to save your preferences and browsing history. No data is sent to external servers.
 				</p>
 			</div>
 

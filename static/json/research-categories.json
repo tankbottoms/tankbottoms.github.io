@@ -1,68 +1,76 @@
 {
 	"categories": [
 		{
-			"id": "naps",
-			"name": "Naps",
-			"shortName": "Naps",
-			"description": "Sleep research and optimal napping spots",
-			"color": "#9c27b0",
-			"icon": "fa-moon"
+			"id": "embedded-systems",
+			"name": "Embedded Systems & Hardware",
+			"shortName": "Embedded",
+			"description": "Fixed-point DSP, firmware, and hardware platform development",
+			"extendedDescription": "The Embedded Systems & Hardware category documents work spanning from fixed-point MP3 encoder implementations on resource-constrained DSP processors to complete consumer electronics product design. Entries cover the Iomega HipZip portable audio player, Dharma digital media platforms, and the engineering challenges of bringing audio codecs to embedded ARM and MIPS architectures in the late 1990s and early 2000s. This body of work established foundational expertise in real-time signal processing, hardware abstraction layers, and the constraints of shipping consumer products with limited memory and compute budgets.",
+			"color": "#1565c0",
+			"icon": "fa-microchip"
 		},
 		{
-			"id": "toys",
-			"name": "Toys",
-			"shortName": "Toys",
-			"description": "Play equipment analysis and reviews",
-			"color": "#ff9800",
-			"icon": "fa-baseball"
+			"id": "patents",
+			"name": "Patents & Intellectual Property",
+			"shortName": "Patents",
+			"description": "11 patents spanning digital content, mobile payments, and retail systems",
+			"extendedDescription": "The Patents & Intellectual Property category catalogs eleven patents filed between 2000 and 2009, covering digital content distribution, mobile value transfer, transactional services, codec mapping, automated login systems, distributed user profiles, and contextual navigation. Several patents were granted by the USPTO while others remain as published applications. These inventions reflect work at the intersection of content delivery networks, retail kiosk systems deployed at NCR, Circuit City, Best Buy, Blockbuster, and InMotion Entertainment, and early mobile payment platforms that predated mainstream adoption of digital wallets.",
+			"color": "#6a1b9a",
+			"icon": "fa-file-certificate"
 		},
 		{
-			"id": "things-to-knock-over",
-			"name": "Things to Knock Over",
-			"shortName": "Chaos",
-			"description": "Physics experiments from elevated surfaces",
-			"color": "#f44336",
-			"icon": "fa-glass-water"
+			"id": "content-delivery",
+			"name": "Content Delivery & Retail Tech",
+			"shortName": "Retail",
+			"description": "Enterprise kiosk platforms deployed at major retailers",
+			"extendedDescription": "The Content Delivery & Retail Tech category covers the design and deployment of enterprise content delivery systems for major retail chains between 2006 and 2009. Central to this work is MOD Systems, which built and operated content kiosks and digital media distribution platforms deployed across thousands of retail locations including Circuit City, Best Buy, Blockbuster Video, and InMotion Entertainment airport stores. Entries detail the architecture of the MOD Pod kiosk hardware, the enterprise v4 platform for managing distributed content networks, and the operational challenges of maintaining uptime across geographically dispersed retail environments.",
+			"color": "#e65100",
+			"icon": "fa-store"
 		},
 		{
-			"id": "mondays",
-			"name": "Mondays",
-			"shortName": "Mondays",
-			"description": "Weekly observations on the worst day",
-			"color": "#607d8b",
-			"icon": "fa-calendar-xmark"
+			"id": "mobile-payments",
+			"name": "Mobile Payments & Fintech",
+			"shortName": "Payments",
+			"description": "Early mobile wallet and value transfer systems",
+			"extendedDescription": "The Mobile Payments & Fintech category documents early-stage mobile payment and digital wallet development from 2007, years before Apple Pay or Google Wallet reached mainstream adoption. The MetaWallet platform enabled mobile value transfer, prepaid card management, and point-of-sale integration through feature phones and early smartphones. Patents in this area cover transactional services architecture and mobile value transfer protocols. This work anticipated the shift toward cashless payment systems and provided foundational architecture patterns that would later become standard in the fintech industry.",
+			"color": "#00838f",
+			"icon": "fa-mobile-screen-button"
 		},
 		{
-			"id": "lasagna",
-			"name": "Lasagna",
-			"shortName": "Lasagna",
-			"description": "Culinary appreciation studies",
-			"color": "#ff5722",
-			"icon": "fa-utensils"
+			"id": "web3-blockchain",
+			"name": "Web3, NFT & DAO",
+			"shortName": "Web3",
+			"description": "Smart contracts, NFT platforms, and DAO governance tools",
+			"extendedDescription": "The Web3, NFT & DAO category covers blockchain development work from 2021 through 2022, including Solidity smart contract development, NFT minting platforms, ERC-20 token deployments, and decentralized autonomous organization governance tooling. Projects span the Movement DAO ecosystem, MEOW token, and various open-source contributions to the Ethereum and Layer 2 ecosystems. Repositories across the tankbottoms and themovementdao GitHub organizations contain the full breadth of this work, from frontend dApps to on-chain governance mechanisms and treasury management contracts.",
+			"color": "#7b1fa2",
+			"icon": "fa-cube"
 		},
 		{
-			"id": "owner-appreciation",
-			"name": "Owner Appreciation",
-			"shortName": "Humans",
-			"description": "Things humans do right",
-			"color": "#e91e63",
-			"icon": "fa-heart"
+			"id": "ai-llm",
+			"name": "AI, LLM & Developer Tools",
+			"shortName": "AI/LLM",
+			"description": "LLM tooling, document intelligence, and developer automation",
+			"extendedDescription": "The AI, LLM & Developer Tools category tracks ongoing work in large language model integration, document intelligence systems, and developer productivity tooling from 2023 to present. Entries cover OCR pipelines combining vision models with structured extraction, MCP server implementations for tool-augmented AI workflows, Claude Code skill development, and the infrastructure supporting AI-assisted development across multiple projects. This category also includes the blog platform itself, which serves as a testbed for SvelteKit, IPFS deployment, and content management innovations.",
+			"color": "#2e7d32",
+			"icon": "fa-brain"
 		},
 		{
-			"id": "pet-peeves",
-			"name": "Pet Peeves",
-			"shortName": "Peeves",
-			"description": "Grievances and complaints",
-			"color": "#795548",
-			"icon": "fa-face-angry"
+			"id": "legal-forensics",
+			"name": "Legal Tech & Forensic Finance",
+			"shortName": "Legal",
+			"description": "SEC forensics, litigation support, and digital evidence tools",
+			"extendedDescription": "The Legal Tech & Forensic Finance category documents tools and platforms built for securities litigation support, SEC EDGAR forensic analysis, and digital evidence management. Projects include automated EDGAR filing scrapers, CIK lookup tools, macOS artifact forensic parsers, and comprehensive litigation support platforms that combine document management with analytical workflows. This work bridges the gap between traditional legal practice and modern computational analysis, enabling attorneys and investigators to process large volumes of financial filings and digital evidence efficiently.",
+			"color": "#c62828",
+			"icon": "fa-scale-balanced"
 		},
 		{
-			"id": "sunbeams",
-			"name": "Sunbeams",
-			"shortName": "Sunbeams",
-			"description": "Solar positioning and warmth optimization",
-			"color": "#ffc107",
-			"icon": "fa-sun"
+			"id": "cryptography",
+			"name": "Cryptography & Privacy",
+			"shortName": "Crypto",
+			"description": "Encryption tooling, privacy utilities, and secure communication",
+			"extendedDescription": "The Cryptography & Privacy category covers development of encryption tools, secure communication utilities, and privacy-preserving systems. Entries include implementations of modern cryptographic primitives, key management solutions, and privacy-focused tooling that supports both personal security and enterprise compliance requirements. This work reflects a commitment to building systems that respect user privacy by default, incorporating end-to-end encryption, zero-knowledge proofs, and secure multi-party computation where applicable.",
+			"color": "#37474f",
+			"icon": "fa-shield-halved"
 		}
 	]
 }
