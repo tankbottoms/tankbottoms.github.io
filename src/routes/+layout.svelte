@@ -171,7 +171,7 @@
 
 	.header-wrapper,
 	.footer-wrapper {
-		max-width: 750px;
+		max-width: var(--content-width);
 		margin: 0 auto;
 	}
 
@@ -293,7 +293,7 @@
 	}
 
 	.content {
-		max-width: 750px;
+		max-width: var(--content-width);
 		margin: 0 auto;
 		min-height: 60vh;
 	}

@@ -92,7 +92,7 @@
 
 <style>
 	.about-page {
-		max-width: 750px;
+		max-width: var(--content-width);
 		margin: 0 auto;
 		padding: 1rem 0;
 	}

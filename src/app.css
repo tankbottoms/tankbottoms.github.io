@@ -5,6 +5,9 @@
 :root {
 	--font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 	--font-serif: 'Georgia', 'Times New Roman', serif;
+
+	/* Content column width. Base was 750px; widened 20% on each side (+300px total). */
+	--content-width: 1050px;
 }
 
 /* Light mode (default) */
@@ -15,13 +18,16 @@
 	--color-text: #111111;
 	--color-text-muted: #666666;
 	--color-border: #e5e5e5;
-	--color-border-dark: #000000;
+	/* Softened from #000000 - timeline dots, rules and hard borders */
+	--color-border-dark: #7a7a7a;
 	--color-link: #0066cc;
 	--color-hover-bg: #e8e8e8;
-	--color-shadow: #000000;
-	--color-timeline: #d4d4d4;
+	/* Softened from #000000 - brutalist offset shadows */
+	--color-shadow: #b0b0b0;
+	--color-timeline: #e0e0e0;
 	--color-featured-bg: #ffffff;
-	--color-featured-border: #000000;
+	/* Softened from #000000 - featured card outline */
+	--color-featured-border: #9a9a9a;
 	--color-code-bg: #f5f5f5;
 	--color-code-text: #111111;
 	/* Chart colors - defaults, overridden by palette */
@@ -38,34 +44,53 @@
 	--chart-event-3: #495057;
 }
 
-/* Dark mode */
+/* Dark mode - Solarized Dark (Ethan Schoonover)
+   base03 #002b36  base02 #073642  base01 #586e75  base00 #657b83
+   base0  #839496  base1  #93a1a1  base2  #eee8d5  base3  #fdf6e3
+   yellow #b58900  orange #cb4b16  red #dc322f  magenta #d33682
+   violet #6c71c4  blue #268bd2   cyan #2aa198  green #859900 */
 [data-theme='dark'] {
-	--color-bg: #0a0a0a;
-	--color-bg-secondary: #1a1a1a;
-	--color-text: #e5e5e5;
-	--color-text-muted: #a0a0a0;
-	--color-border: #2a2a2a;
-	--color-border-dark: #e5e5e5;
-	--color-link: #5c9fd8;
-	--color-hover-bg: #1a1a1a;
-	--color-shadow: #000000;
-	--color-timeline: #3a3a3a;
-	--color-featured-bg: #1a1a1a;
-	--color-featured-border: #e5e5e5;
-	--color-code-bg: #0f0f0f;
-	--color-code-text: #d4d4d4;
-	/* Chart colors - dark mode greyscale */
-	--chart-accumulation: #3a3a3a;
-	--chart-accumulation-line: #4a4a4a;
-	--chart-pump: #5a5a5a;
-	--chart-pump-line: #6a6a6a;
-	--chart-dump: #4a4a4a;
-	--chart-dump-line: #5a5a5a;
-	--chart-volume-low: #4a4a4a;
-	--chart-volume-high: #7a7a7a;
-	--chart-event-1: #5a5a5a;
-	--chart-event-2: #6a6a6a;
-	--chart-event-3: #7a7a7a;
+	--solarized-base03: #002b36;
+	--solarized-base02: #073642;
+	--solarized-base01: #586e75;
+	--solarized-base00: #657b83;
+	--solarized-base0: #839496;
+	--solarized-base1: #93a1a1;
+	--solarized-yellow: #b58900;
+	--solarized-orange: #cb4b16;
+	--solarized-red: #dc322f;
+	--solarized-magenta: #d33682;
+	--solarized-violet: #6c71c4;
+	--solarized-blue: #268bd2;
+	--solarized-cyan: #2aa198;
+	--solarized-green: #859900;
+
+	--color-bg: var(--solarized-base03);
+	--color-bg-secondary: var(--solarized-base02);
+	--color-text: var(--solarized-base1);
+	--color-text-muted: var(--solarized-base00);
+	--color-border: #0d4552;
+	--color-border-dark: var(--solarized-base01);
+	--color-link: var(--solarized-blue);
+	--color-hover-bg: var(--solarized-base02);
+	--color-shadow: #001a21;
+	--color-timeline: #0f4a58;
+	--color-featured-bg: var(--solarized-base02);
+	--color-featured-border: var(--solarized-base01);
+	--color-code-bg: var(--solarized-base02);
+	--color-code-text: var(--solarized-base1);
+	/* Chart colors - solarized accents */
+	--chart-accumulation: #0a3d49;
+	--chart-accumulation-line: var(--solarized-cyan);
+	--chart-pump: #0e4a52;
+	--chart-pump-line: var(--solarized-green);
+	--chart-dump: #123f4a;
+	--chart-dump-line: var(--solarized-orange);
+	--chart-volume-low: var(--solarized-base01);
+	--chart-volume-high: var(--solarized-base0);
+	--chart-event-1: var(--solarized-blue);
+	--chart-event-2: var(--solarized-violet);
+	--chart-event-3: var(--solarized-magenta);
 }
 
 body {
@@ -77,6 +102,56 @@ body {
 	background-color: var(--color-bg);
 	color: var(--color-text);
 	transition: background-color 0.3s, color 0.3s;
+}
+
+/* Justified body copy.
+   Hyphenation prevents the rivers/large word-gaps that justification
+   otherwise produces in a monospace column. */
+.post-content p,
+.post-content li,
+.post-content blockquote,
+.intro p,
+.prose p,
+.prose li,
+.page-content p,
+.timeline-blurb {
+	text-align: justify;
+	text-justify: inter-word;
+	hyphens: auto;
+	-webkit-hyphens: auto;
+	overflow-wrap: break-word;
+}
+
+/* Never justify things that must not stretch */
+.post-content pre,
+.post-content code,
+.post-content table,
+.post-content th,
+.post-content td,
+.media-center,
+.media-blocked {
+	text-align: initial;
+	hyphens: none;
+	-webkit-hyphens: none;
+}
+
+.media-center,
+.media-blocked {
+	text-align: center;
+}
+
+/* Single-line / narrow columns read badly justified */
+@media (max-width: 640px) {
+	.post-content p,
+	.post-content li,
+	.intro p,
+	.prose p,
+	.prose li,
+	.timeline-blurb {
+		text-align: left;
+		hyphens: none;
+		-webkit-hyphens: none;
+	}
 }
 
 /* Custom layout components for rich positioning */

@@ -77,7 +77,7 @@
 
 <style>
 	.category-page {
-		max-width: 750px;
+		max-width: var(--content-width);
 		margin: 0 auto;
 		padding: 2rem 0;
 	}

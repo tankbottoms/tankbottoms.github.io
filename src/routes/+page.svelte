@@ -505,7 +505,7 @@
 
 <style>
 	.page-wrapper {
-		max-width: 750px;
+		max-width: var(--content-width);
 		margin: 0 auto;
 	}
 
@@ -668,10 +668,12 @@
 	.year-text {
 		display: block;
 		font-family: var(--font-mono);
-		font-size: 1.1rem;
-		font-weight: 600;
+		/* Smaller, lighter weight, but darker (higher opacity) than before */
+		font-size: 0.85rem;
+		font-weight: 400;
+		letter-spacing: 0.02em;
 		color: var(--color-text);
-		opacity: 0.4;
+		opacity: 0.72;
 		line-height: 1;
 		transition: opacity 0.3s ease, color 0.3s ease;
 	}
@@ -723,16 +725,19 @@
 	.month-text {
 		display: block;
 		font-family: var(--font-mono);
-		font-size: 0.7rem;
-		font-weight: 600;
-		color: var(--color-text-muted);
+		/* Smaller, lighter weight, darker colour than the muted grey */
+		font-size: 0.6rem;
+		font-weight: 400;
+		color: var(--color-text);
+		opacity: 0.6;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		transition: color 0.3s ease;
+		letter-spacing: 0.06em;
+		transition: color 0.3s ease, opacity 0.3s ease;
 	}
 
 	:global(.month-marker.sticky-active) .month-text {
 		color: #7b1fa2;
+		opacity: 1;
 	}
 
 	:global(.page-scrolling .month-marker.sticky-active) .month-text {
