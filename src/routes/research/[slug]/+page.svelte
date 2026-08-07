@@ -36,7 +36,7 @@
 </script>
 
 <svelte:head>
-	<title>{categoryInfo?.name || 'Category'} | atsignhandle.xyz</title>
+	<title>{categoryInfo?.name || 'Category'} | tankbottoms.xyz</title>
 	<meta name="description" content="Research entries in the {categoryInfo?.name} category" />
 </svelte:head>
 

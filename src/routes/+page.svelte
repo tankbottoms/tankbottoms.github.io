@@ -369,7 +369,7 @@
 </script>
 
 <svelte:head>
-	<title>atsignhandle.xyz | Development Portfolio</title>
+	<title>tankbottoms.xyz | Development Portfolio</title>
 	<meta name="description" content="Development portfolio documenting embedded systems, patents, content delivery, mobile payments, Web3, AI/LLM tooling, and legal tech" />
 </svelte:head>
 
@@ -392,7 +392,7 @@
 		{:else}
 			{@const s = filteredStats()}
 			<p>
-				<strong>atsignhandle.xyz</strong> chronicles projects spanning three decades of development -- from fixed-point audio codecs and embedded media players to retail kiosk platforms, mobile payment protocols, digital content distribution systems, Web3 smart contracts, cryptographic privacy tools, digital forensics, and AI/LLM agent development. The portfolio includes 11 patents, 55+ open source repositories, and projects in HITL testing, NFC transactions, NFT marketplaces, document intelligence, and browser automation.
+				<strong>tankbottoms.xyz</strong> chronicles projects spanning three decades of development -- from fixed-point audio codecs and embedded media players to retail kiosk platforms, mobile payment protocols, digital content distribution systems, Web3 smart contracts, cryptographic privacy tools, digital forensics, and AI/LLM agent development. The portfolio includes 11 patents, 55+ open source repositories, and projects in HITL testing, NFC transactions, NFT marketplaces, document intelligence, and browser automation.
 			</p>
 			<p class="intro-narrative-stats">
 				This timeline comprises {s.entries} entries across {categories.length} categories totaling approximately {s.words.toLocaleString()} words and {s.chars.toLocaleString()} characters{#if s.earliest}, spanning {formatDateRange(s.earliest, s.latest)}{/if}. Each entry is rated by significance -- the more stars, the greater the impact.

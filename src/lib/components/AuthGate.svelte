@@ -63,7 +63,7 @@
 				/>
 			</div>
 
-			<h1 class="auth-title">atsignhandle.xyz</h1>
+			<h1 class="auth-title">tankbottoms.xyz</h1>
 			<p class="auth-subtitle">Enter password to access</p>
 
 			<form onsubmit={handlePasswordSubmit} class="auth-form">

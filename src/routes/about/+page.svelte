@@ -26,16 +26,16 @@
 </script>
 
 <svelte:head>
-	<title>About | atsignhandle.xyz</title>
+	<title>About | tankbottoms.xyz</title>
 	<meta name="description" content="Development portfolio spanning embedded systems, content delivery, mobile payments, Web3, AI/LLM tooling, and legal tech" />
 </svelte:head>
 
 <div class="about-page">
 	<div class="about-content">
 		<div class="hero-section">
-			<img src="{base}/images/mrwhiskers-me.svg" alt="atsignhandle" class="hero-image" />
+			<img src="{base}/images/mrwhiskers-me.svg" alt="tankbottoms" class="hero-image" />
 			<div class="hero-text">
-				<h1>atsignhandle.xyz</h1>
+				<h1>tankbottoms.xyz</h1>
 				<p class="subtitle">Development and Interests</p>
 			</div>
 		</div>

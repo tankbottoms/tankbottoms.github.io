@@ -78,7 +78,7 @@
 					<a class="title" href="{base}/">
 						<img src="{base}/images/mrwhiskers-me.svg" alt="" class="title-logo" />
 						<span class="title-text">
-							<span class="title-default">atsignhandle.xyz</span>
+							<span class="title-default">tankbottoms.xyz</span>
 							<span class="title-hover">Development Portfolio</span>
 						</span>
 					</a>
@@ -114,7 +114,7 @@
 			<div class="footer">
 				<div class="footer-content">
 					<span class="footer-title">
-						<span class="footer-title-default">atsignhandle.xyz</span>
+						<span class="footer-title-default">tankbottoms.xyz</span>
 						<span class="footer-title-hover">Development History</span>
 					</span>
 					<span class="footer-separator">*</span>

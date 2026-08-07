@@ -180,7 +180,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.metadata.title || 'Post'} | atsignhandle.xyz</title>
+	<title>{data.metadata.title || 'Post'} | tankbottoms.xyz</title>
 	{#if data.metadata.blurb}
 		<meta name="description" content={data.metadata.blurb} />
 	{/if}
@@ -314,10 +314,10 @@
 
 	.post-title {
 		font-family: var(--font-serif);
-		font-size: 2.5rem;
+		font-size: 1.75rem;
 		font-weight: 600;
 		margin: 0 0 1rem 0;
-		line-height: 1.2;
+		line-height: 1.25;
 		color: var(--color-text);
 	}
 
@@ -473,7 +473,7 @@
 
 	@media (max-width: 640px) {
 		.post-title {
-			font-size: 2rem;
+			font-size: 1.4rem;
 		}
 	}
 

@@ -7,7 +7,7 @@
 	}
 
 	function exportMarkdown() {
-		const content = `# UX Specification - atsignhandle.xyz
+		const content = `# UX Specification - tankbottoms.xyz
 
 Generated: 2026-01-08
 
@@ -265,7 +265,7 @@ input {
 	}
 
 	function exportText() {
-		const content = `UX SPECIFICATION - atsignhandle.xyz
+		const content = `UX SPECIFICATION - tankbottoms.xyz
 ==================================================
 Generated: 2026-01-08
 
@@ -437,8 +437,8 @@ For full specification, see: docs/UX_SPECIFICATION.md
 </script>
 
 <svelte:head>
-	<title>UX Specification | atsignhandle.xyz</title>
-	<meta name="description" content="Design system documentation for atsignhandle.xyz" />
+	<title>UX Specification | tankbottoms.xyz</title>
+	<meta name="description" content="Design system documentation for tankbottoms.xyz" />
 </svelte:head>
 
 <div class="ux-spec-page">
@@ -446,7 +446,7 @@ For full specification, see: docs/UX_SPECIFICATION.md
 		<div class="header-content">
 			<a href="{base}/" class="back-link"><i class="fat fa-arrow-left"></i> Back to Timeline</a>
 			<h1>UX Specification</h1>
-			<p class="subtitle">Design system documentation for atsignhandle.xyz</p>
+			<p class="subtitle">Design system documentation for tankbottoms.xyz</p>
 		</div>
 		<div class="export-icons">
 			<button onclick={exportPdf} aria-label="Download PDF" title="Download PDF">
@@ -589,7 +589,7 @@ For full specification, see: docs/UX_SPECIFICATION.md
 		<div class="typography-examples">
 			<div class="type-example">
 				<span class="type-label">H1 - Serif</span>
-				<h1 class="demo-h1">atsignhandle.xyz</h1>
+				<h1 class="demo-h1">tankbottoms.xyz</h1>
 				<code>font-family: var(--font-serif); font-size: 2rem;</code>
 			</div>
 			<div class="type-example">
@@ -1086,13 +1086,13 @@ transform: scale(1.02);</code></pre>
 		<h3>Quote/Testimony Box</h3>
 		<div class="testimony-box">
 			<p>"The optimal napping position has been scientifically determined to maximize both comfort and sunbeam absorption."</p>
-			<cite>- atsignhandle</cite>
+			<cite>- tankbottoms</cite>
 		</div>
 
 		<h3>Code Block (Dark)</h3>
 		<div class="code-block">
 			<pre><code>const whiskers = &lbrace;
-  name: 'atsignhandle',
+  name: 'tankbottoms',
   occupation: 'Professional Napper',
   significance: 5
 &rbrace;;</code></pre>

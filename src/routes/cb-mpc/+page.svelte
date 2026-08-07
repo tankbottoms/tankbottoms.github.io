@@ -42,7 +42,7 @@
 </script>
 
 <svelte:head>
-	<title>CB-MPC Visual Guide | atsignhandle.xyz</title>
+	<title>CB-MPC Visual Guide | tankbottoms.xyz</title>
 	<meta name="description" content="Visual guide to CB-MPC multi-party computation key management -- protocol flows, iOS app mockups, and architecture diagrams" />
 </svelte:head>
 

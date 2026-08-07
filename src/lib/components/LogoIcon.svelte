@@ -17,7 +17,7 @@
 	onmouseenter={() => (isHovered = true)}
 	onmouseleave={() => (isHovered = false)}
 	role="img"
-	aria-label="atsignhandle icon"
+	aria-label="tankbottoms icon"
 >
 	<img
 		src="{base}/images/mrwhiskers-me.svg"

@@ -27,7 +27,7 @@
 			<h2>Privacy & Cookie Notice</h2>
 
 			<div class="info-section">
-				<h3>Welcome to atsignhandle.xyz</h3>
+				<h3>Welcome to tankbottoms.xyz</h3>
 				<p>
 					This portfolio documents a development career spanning embedded systems, enterprise content delivery, mobile payments, Web3, AI/LLM tooling, and legal technology.
 				</p>

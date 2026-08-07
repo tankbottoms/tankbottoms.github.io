@@ -300,8 +300,8 @@
 </script>
 
 <svelte:head>
-	<title>Search - atsignhandle.xyz</title>
-	<meta name="description" content="Search atsignhandle portfolio entries and projects" />
+	<title>Search - tankbottoms.xyz</title>
+	<meta name="description" content="Search tankbottoms portfolio entries and projects" />
 </svelte:head>
 
 <div class="page-wrapper">
